@@ -1,6 +1,9 @@
-# platescape
+# Platescape
 
-Where every plate tells a story.
+Where every plate tells a story – A sleek and intuitive app for mocking restaurant menus and
+showcasing delicious dishes. Designed for seamless exploration, it allows users to browse menus and
+discover restaurants effortlessly. Perfect for restaurant owners, food enthusiasts, or developers
+prototyping a restaurant app with Flutter. 🚀🍽️
 
 ## Getting Started
 
