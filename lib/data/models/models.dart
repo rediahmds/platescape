@@ -1,2 +1,1 @@
-export 'restaurant.dart';
-export 'restaurant_list_response.dart';
+export 'list/list.dart';
