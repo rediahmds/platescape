@@ -11,7 +11,7 @@ class RestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -26,7 +26,7 @@ class RestaurantCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(restaurant.name),
@@ -34,6 +34,9 @@ class RestaurantCard extends StatelessWidget {
                     dimension: 8.0,
                   ),
                   CardCity(city: restaurant.city),
+                  const SizedBox.square(
+                    dimension: 8.0,
+                  ),
                   CardRating(rating: restaurant.rating),
                 ],
               ),
