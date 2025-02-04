@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:platescape/data/models/detail/restaurant_details_response.dart';
 import 'package:platescape/data/models/models.dart';
 
 class APIServices {
@@ -9,6 +10,11 @@ class APIServices {
   Future<RestaurantListResponse> getRestaurantList() async {
     final response = await _dio.get("/list");
     return RestaurantListResponse.fromJson(response.data);
+  }
+
+  Future<RestaurantDetailsResponse> getRestaurantDetails(String id) async {
+    final response = await _dio.get("/detail/$id");
+    return RestaurantDetailsResponse.fromJson(response.data);
   }
 
   String getLowResPictureUrl(String pictureId) =>
