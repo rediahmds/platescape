@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
 import 'package:platescape/provider/platescape_providers.dart';
 import 'package:platescape/screens/screens.dart';
+import 'package:platescape/static/static.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -26,12 +27,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: AppRoute.home.route,
+      routes: {
+        AppRoute.home.route: (context) => HomeScreen(),
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
     );
   }
 }
