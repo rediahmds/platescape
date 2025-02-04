@@ -8,7 +8,7 @@ class CardRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(Icons.star_rounded),
         const SizedBox.square(dimension: 4.0),
