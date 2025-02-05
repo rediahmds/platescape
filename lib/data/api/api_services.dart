@@ -3,7 +3,7 @@ import 'package:platescape/data/models/detail/restaurant_details_response.dart';
 import 'package:platescape/data/models/models.dart';
 
 class APIServices {
-  static const String _baseUrl = "https://restaurant-api.dicoding.dev/";
+  static const String _baseUrl = "https://restaurant-api.dicoding.dev";
   static final _options = BaseOptions(baseUrl: _baseUrl);
   static final _dio = Dio(_options);
 
