@@ -35,6 +35,9 @@ class App extends StatelessWidget {
       initialRoute: AppRoute.home.route,
       routes: {
         AppRoute.home.route: (context) => HomeScreen(),
+        AppRoute.detail.route: (context) => DetailScreen(
+              id: ModalRoute.of(context)?.settings.arguments as String,
+            ),
       },
       title: 'Flutter Demo',
       theme: ThemeData(
