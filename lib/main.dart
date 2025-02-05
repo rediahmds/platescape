@@ -15,6 +15,11 @@ void main() {
         create: (context) =>
             RestaurantListProvider(context.read<APIServices>()),
       ),
+      ChangeNotifierProvider(
+        create: (context) => RestaurantDetailsProvider(
+          context.read<APIServices>(),
+        ),
+      ),
     ],
     child: App(),
   ));
