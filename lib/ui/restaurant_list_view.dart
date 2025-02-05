@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/data/models/models.dart';
-import 'package:platescape/ui/restaurant_card/restaurant_card.dart';
+import 'package:platescape/data/data.dart';
+import 'package:platescape/static/static.dart';
+import 'package:platescape/ui/ui.dart';
 
 class RestaurantListView extends StatelessWidget {
-  const RestaurantListView({super.key, required this.restaurantList});
+  const RestaurantListView({
+    super.key,
+    required this.restaurantList,
+  });
 
   final List<Restaurant> restaurantList;
 
