@@ -1,2 +1,2 @@
-export 'detail_screen.dart';
-export 'home_screen.dart';
+export 'detail/detail.dart';
+export 'home/home_screen.dart';
