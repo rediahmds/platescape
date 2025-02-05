@@ -21,8 +21,11 @@ class RestaurantListView extends StatelessWidget {
         return RestaurantCard(
             restaurant: restaurant,
             onTap: () {
-              //TODO: Navigate to detail
-              debugPrint("[TODO] ${restaurant.name} clicked");
+              Navigator.pushNamed(
+                context,
+                AppRoute.detail.route,
+                arguments: restaurant.id,
+              );
             });
       },
     );
