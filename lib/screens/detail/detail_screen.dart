@@ -30,19 +30,22 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: Ink(
-          decoration: ShapeDecoration(
-            color: Theme.of(context).colorScheme.onSecondary,
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            constraints: BoxConstraints(
-              maxWidth: 20,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: Ink(
+            decoration: ShapeDecoration(
+              color: Theme.of(context).colorScheme.onSecondary,
+              shape: CircleBorder(),
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_rounded),
+            child: IconButton(
+              constraints: BoxConstraints(
+                maxWidth: 20,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_rounded),
+            ),
           ),
         ),
         backgroundColor: Colors.transparent,
