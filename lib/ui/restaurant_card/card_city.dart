@@ -16,6 +16,7 @@ class CardCity extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           softWrap: true,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     );

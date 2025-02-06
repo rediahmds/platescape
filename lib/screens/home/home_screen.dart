@@ -25,7 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Platescape"),
+        title: Text(
+          "Platescape",
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: Consumer<RestaurantListProvider>(
@@ -38,8 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
             case RestaurantListLoadedState(data: final restaurantList):
               return RestaurantListView(restaurantList: restaurantList);
             default:
-              return const Center(
-                child: Text("An unexpected error occurred"),
+              return Center(
+                child: Text(
+                  "An unexpected error occurred",
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
               );
           }
         },
