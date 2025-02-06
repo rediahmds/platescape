@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:platescape/data/data.dart';
 import 'package:platescape/provider/platescape_providers.dart';
 import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/static.dart';
+import 'package:platescape/styles/styles.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -40,13 +40,10 @@ class App extends StatelessWidget {
               id: ModalRoute.of(context)?.settings.arguments as String,
             ),
       },
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        textTheme:
-            GoogleFonts.plusJakartaSansTextTheme(Theme.of(context).textTheme),
-      ),
+      title: 'Platescape',
+      theme: PlatescapeTheme.lightTheme,
+      darkTheme: PlatescapeTheme.darkTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }
