@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 enum PlatescapeColors {
   green("Green", Colors.green),
   blue("Blue", Colors.blue),
-  purple("Purple", Colors.purple);
+  purple("Purple", Colors.purple),
+  yellow("Yellow", Colors.yellow);
 
   final String name;
   final Color color;
