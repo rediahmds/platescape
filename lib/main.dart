@@ -43,7 +43,7 @@ class App extends StatelessWidget {
       title: 'Platescape',
       theme: PlatescapeTheme.lightTheme,
       darkTheme: PlatescapeTheme.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.system,
     );
   }
 }
