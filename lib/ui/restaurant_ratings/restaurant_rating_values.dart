@@ -5,10 +5,12 @@ class RestaurantRatingValues extends StatelessWidget {
     super.key,
     required this.rating,
     required this.totalReviews,
+    this.maxRating = 5,
   });
 
   final double rating;
   final int totalReviews;
+  final int maxRating;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class RestaurantRatingValues extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(rating.toString()),
+        Text("${rating.toString()} out of $maxRating"),
         const SizedBox.square(dimension: 4.0),
         Text("${totalReviews.toString()} Reviews"),
       ],

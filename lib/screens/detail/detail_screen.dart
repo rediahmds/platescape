@@ -38,9 +38,6 @@ class _DetailScreenState extends State<DetailScreen> {
               shape: CircleBorder(),
             ),
             child: IconButton(
-              constraints: BoxConstraints(
-                maxWidth: 20,
-              ),
               onPressed: () {
                 Navigator.pop(context);
               },
