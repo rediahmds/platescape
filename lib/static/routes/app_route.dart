@@ -1,6 +1,7 @@
 enum AppRoute {
   home('/'),
-  detail('/detail');
+  detail('/detail'),
+  reviews('reviews');
 
   final String route;
 
