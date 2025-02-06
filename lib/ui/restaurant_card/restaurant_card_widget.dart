@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:platescape/data/data.dart';
+import 'package:platescape/ui/restaurant_card/restaurant_card.dart';
+
+class RestaurantCard extends StatelessWidget {
+  const RestaurantCard(
+      {super.key, required this.restaurant, required this.onTap});
+
+  final Restaurant restaurant;
+  final Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12.0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CardImage(
+              pictureUrl:
+                  APIServices().getLowResPictureUrl(restaurant.pictureId),
+              // minWidth: 60,
+              // minHeight: 60,
+            ),
+            const SizedBox.square(dimension: 8.0),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    restaurant.name,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox.square(
+                    dimension: 8.0,
+                  ),
+                  CardCity(city: restaurant.city),
+                  const SizedBox.square(
+                    dimension: 8.0,
+                  ),
+                  CardRating(rating: restaurant.rating),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
