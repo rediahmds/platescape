@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:platescape/data/data.dart';
 import 'package:platescape/provider/platescape_providers.dart';
 import 'package:platescape/screens/screens.dart';
@@ -43,6 +44,8 @@ class App extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textTheme:
+            GoogleFonts.plusJakartaSansTextTheme(Theme.of(context).textTheme),
       ),
     );
   }
