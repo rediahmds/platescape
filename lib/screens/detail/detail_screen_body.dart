@@ -19,8 +19,8 @@ class DetailScreenBody extends StatelessWidget {
             child: CardImage(
               pictureUrl: APIServices()
                   .getHighResPictureUrl(restaurantDetails.pictureId),
-              maxWidth: 480,
-              maxHeight: 480,
+              maxWidth: MediaQuery.of(context).size.width,
+              maxHeight: 500,
               borderRadius: 25.0,
             ),
           ),
@@ -29,8 +29,13 @@ class DetailScreenBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(restaurantDetails.name),
+                Text(
+                  restaurantDetails.name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox.square(dimension: 8.0),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     RestaurantLocation(
                         city: restaurantDetails.city,
@@ -41,19 +46,24 @@ class DetailScreenBody extends StatelessWidget {
                         totalReviews: restaurantDetails.customerReviews.length)
                   ],
                 ),
-                Text(restaurantDetails.description),
+                const SizedBox.square(dimension: 8.0),
+                Text(
+                  restaurantDetails.description,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox.square(dimension: 8.0),
                 ExpansionTile(
                   title: const Text("Categories"),
-                  // showTrailingIcon: false,
-                  // controlAffinity: ListTileControlAffinity.leading,
                   children:
                       _generateCategoryTiles(restaurantDetails.categories),
                 ),
+                const SizedBox.square(dimension: 8.0),
                 ExpansionTile(
                   title: const Text("Foods"),
                   initiallyExpanded: true,
                   children: _generateFoodsTiles(restaurantDetails.menus.foods),
                 ),
+                const SizedBox.square(dimension: 8.0),
                 ExpansionTile(
                   title: const Text("Drinks"),
                   initiallyExpanded: true,

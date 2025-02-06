@@ -32,7 +32,7 @@ class _DetailScreenState extends State<DetailScreen> {
       appBar: AppBar(
         leading: Ink(
           decoration: ShapeDecoration(
-            color: Colors.deepPurpleAccent,
+            color: Theme.of(context).colorScheme.onSecondary,
             shape: CircleBorder(),
           ),
           child: IconButton(

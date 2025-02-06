@@ -4,29 +4,52 @@ class CardImage extends StatelessWidget {
   const CardImage({
     super.key,
     required this.pictureUrl,
-    this.width = 120,
-    this.height = 90,
+    this.minWidth = 80,
+    this.minHeight = 80,
+    this.maxWidth = 120,
+    this.maxHeight = 120,
     this.borderRadius = 15.0,
+    this.aspectRatio = 4 / 3,
   });
 
   final String pictureUrl;
-  final double width;
-  final double height;
+  final double minWidth;
+  final double minHeight;
+  final double maxWidth;
+  final double maxHeight;
   final double borderRadius;
+  final double aspectRatio;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth: minWidth,
+        minHeight: minHeight,
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius),
-        child: AspectRatio(
-          aspectRatio: width / height, // Ensures a uniform aspect ratio
-          child: Image.network(
-            pictureUrl,
-            fit: BoxFit.cover, // Crops the image to fill the box
-          ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            double width = constraints.maxWidth;
+            double height = width / aspectRatio;
+
+            if (height > constraints.maxHeight) {
+              height = constraints.maxHeight;
+              width = height * aspectRatio;
+            }
+
+            return SizedBox(
+              width: width,
+              height: height,
+              child: Image.network(
+                pictureUrl,
+                fit: BoxFit.cover,
+              ),
+            );
+          },
         ),
       ),
     );
