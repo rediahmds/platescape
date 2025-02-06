@@ -18,10 +18,13 @@ class RestaurantCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             CardImage(
               pictureUrl:
                   APIServices().getLowResPictureUrl(restaurant.pictureId),
+              // minWidth: 60,
+              // minHeight: 60,
             ),
             const SizedBox.square(dimension: 8.0),
             Expanded(
@@ -30,7 +33,10 @@ class RestaurantCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(restaurant.name),
+                  Text(
+                    restaurant.name,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                   const SizedBox.square(
                     dimension: 8.0,
                   ),

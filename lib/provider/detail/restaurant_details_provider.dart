@@ -1,0 +1,33 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
+import 'package:platescape/data/api/api_services.dart';
+import 'package:platescape/static/states/states.dart';
+
+class RestaurantDetailsProvider extends ChangeNotifier {
+  RestaurantDetailsProvider(this._apiServices);
+
+  final APIServices _apiServices;
+
+  RestaurantDetailsResultState _resultState = RestaurantDetailsNoneState();
+
+  RestaurantDetailsResultState get resultState => _resultState;
+
+  Future<void> fetchRestaurantDetails(String id) async {
+    _updateState(RestaurantDetailsLoadingState());
+    try {
+      final result = await _apiServices.getRestaurantDetails(id);
+
+      _updateState(result.error
+          ? RestaurantDetailsErrorState(result.message)
+          : RestaurantDetailsLoadedState(result.restaurant));
+    } on DioException catch (dioException) {
+      _updateState(RestaurantDetailsErrorState(dioException.message ??
+          "An unexpected error occurred while fetching restaurant details"));
+    }
+  }
+
+  void _updateState(RestaurantDetailsResultState state) {
+    _resultState = state;
+    notifyListeners();
+  }
+}

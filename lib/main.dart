@@ -3,6 +3,7 @@ import 'package:platescape/data/data.dart';
 import 'package:platescape/provider/platescape_providers.dart';
 import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/static.dart';
+import 'package:platescape/styles/styles.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -14,6 +15,11 @@ void main() {
       ChangeNotifierProvider(
         create: (context) =>
             RestaurantListProvider(context.read<APIServices>()),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => RestaurantDetailsProvider(
+          context.read<APIServices>(),
+        ),
       ),
     ],
     child: App(),
@@ -30,12 +36,14 @@ class App extends StatelessWidget {
       initialRoute: AppRoute.home.route,
       routes: {
         AppRoute.home.route: (context) => HomeScreen(),
+        AppRoute.detail.route: (context) => DetailScreen(
+              id: ModalRoute.of(context)?.settings.arguments as String,
+            ),
       },
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: 'Platescape',
+      theme: PlatescapeTheme.lightTheme,
+      darkTheme: PlatescapeTheme.darkTheme,
+      themeMode: ThemeMode.dark,
     );
   }
 }

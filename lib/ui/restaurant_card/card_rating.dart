@@ -12,7 +12,10 @@ class CardRating extends StatelessWidget {
       children: [
         Icon(Icons.star_rounded),
         const SizedBox.square(dimension: 4.0),
-        Text(rating.toString()),
+        Text(
+          rating.toString(),
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
       ],
     );
   }

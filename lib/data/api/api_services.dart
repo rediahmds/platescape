@@ -1,14 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:platescape/data/models/detail/restaurant_details_response.dart';
 import 'package:platescape/data/models/models.dart';
 
 class APIServices {
-  static const String _baseUrl = "https://restaurant-api.dicoding.dev/";
+  static const String _baseUrl = "https://restaurant-api.dicoding.dev";
   static final _options = BaseOptions(baseUrl: _baseUrl);
   static final _dio = Dio(_options);
 
   Future<RestaurantListResponse> getRestaurantList() async {
     final response = await _dio.get("/list");
     return RestaurantListResponse.fromJson(response.data);
+  }
+
+  Future<RestaurantDetailsResponse> getRestaurantDetails(String id) async {
+    final response = await _dio.get("/detail/$id");
+    return RestaurantDetailsResponse.fromJson(response.data);
   }
 
   String getLowResPictureUrl(String pictureId) =>
