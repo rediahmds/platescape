@@ -13,8 +13,9 @@ void main() {
         create: (context) => APIServices(),
       ),
       ChangeNotifierProvider(
-        create: (context) =>
-            RestaurantListProvider(context.read<APIServices>()),
+        create: (context) => RestaurantListProvider(
+          context.read<APIServices>(),
+        ),
       ),
       ChangeNotifierProvider(
         create: (context) => RestaurantDetailsProvider(

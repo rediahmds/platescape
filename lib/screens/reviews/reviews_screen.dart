@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
-import 'package:platescape/ui/ui.dart';
+import 'package:platescape/screens/screens.dart';
 
 class ReviewsScreen extends StatelessWidget {
   const ReviewsScreen({
@@ -35,17 +35,7 @@ class ReviewsScreen extends StatelessWidget {
             },
             icon: Icon(Icons.arrow_back_rounded)),
       ),
-      body: ListView.builder(
-        itemCount: reviews.length,
-        itemBuilder: (context, index) {
-          final review = reviews[index];
-          return RestaurantReviewCard(
-            name: review.name,
-            date: review.date,
-            review: review.review,
-          );
-        },
-      ),
+      body: ReviewsScreenBody(reviews: reviews),
     );
   }
 }
