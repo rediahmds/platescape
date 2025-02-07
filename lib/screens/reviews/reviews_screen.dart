@@ -68,7 +68,66 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                     left: 8,
                     right: 8,
                     child: FilledButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          showDragHandle: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(16.0),
+                            ),
+                          ),
+                          builder: (context) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                                top: 16,
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom +
+                                        16,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Write a Review",
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      labelText: "Your Name",
+                                      border: OutlineInputBorder(),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  TextField(
+                                    decoration: InputDecoration(
+                                      labelText: "Your Review",
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    maxLines: 6,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("Submit"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
                       icon: const Icon(Icons.rate_review_rounded),
                       label: const Text("Add Review"),
                     ),
