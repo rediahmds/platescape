@@ -39,7 +39,7 @@ class ReviewsScreen extends StatelessWidget {
         itemCount: reviews.length,
         itemBuilder: (context, index) {
           final review = reviews[index];
-          return RestaurantReviewTile(
+          return RestaurantReviewCard(
             name: review.name,
             date: review.date,
             review: review.review,

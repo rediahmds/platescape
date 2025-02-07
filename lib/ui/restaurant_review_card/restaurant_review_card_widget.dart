@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RestaurantReviewTile extends StatelessWidget {
-  const RestaurantReviewTile({
+class RestaurantReviewCard extends StatelessWidget {
+  const RestaurantReviewCard({
     super.key,
     required this.name,
     required this.date,
