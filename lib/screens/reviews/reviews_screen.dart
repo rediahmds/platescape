@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
+import 'package:platescape/ui/ui.dart';
 
 class ReviewsScreen extends StatelessWidget {
   const ReviewsScreen({
@@ -21,7 +22,7 @@ class ReviewsScreen extends StatelessWidget {
               restaurantName,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox.square(dimension: 8),
+            const SizedBox.square(dimension: 6.0),
             Text(
               "Reviews",
               style: Theme.of(context).textTheme.titleSmall,
@@ -33,6 +34,17 @@ class ReviewsScreen extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_rounded)),
+      ),
+      body: ListView.builder(
+        itemCount: reviews.length,
+        itemBuilder: (context, index) {
+          final review = reviews[index];
+          return RestaurantReviewTile(
+            name: review.name,
+            date: review.date,
+            review: review.review,
+          );
+        },
       ),
     );
   }
