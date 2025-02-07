@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/provider/platescape_providers.dart';
+import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/states/states.dart';
 import 'package:provider/provider.dart';

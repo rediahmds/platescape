@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
-import 'package:platescape/provider/platescape_providers.dart';
+import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/static.dart';
 import 'package:platescape/styles/styles.dart';
