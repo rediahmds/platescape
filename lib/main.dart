@@ -39,6 +39,13 @@ class App extends StatelessWidget {
         AppRoute.detail.route: (context) => DetailScreen(
               id: ModalRoute.of(context)?.settings.arguments as String,
             ),
+        AppRoute.reviews.route: (context) {
+          final args = ModalRoute.of(context)?.settings.arguments
+              as Map<String, dynamic>;
+
+          return ReviewsScreen(
+              restaurantName: args["restaurantName"], reviews: args["reviews"]);
+        },
       },
       title: 'Platescape',
       theme: PlatescapeTheme.lightTheme,
