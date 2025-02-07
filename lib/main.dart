@@ -44,7 +44,9 @@ class App extends StatelessWidget {
               as Map<String, dynamic>;
 
           return ReviewsScreen(
-              restaurantName: args["restaurantName"], reviews: args["reviews"]);
+            restaurantName: args["restaurantName"],
+            restaurantId: args["restaurantId"],
+          );
         },
       },
       title: 'Platescape',

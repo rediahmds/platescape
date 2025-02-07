@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/data/data.dart';
+import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/screens.dart';
+import 'package:platescape/static/states/restaurant_details_result_state.dart';
+import 'package:provider/provider.dart';
 
-class ReviewsScreen extends StatelessWidget {
+class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({
     super.key,
     required this.restaurantName,
-    required this.reviews,
+    required this.restaurantId,
   });
 
   final String restaurantName;
-  final List<CustomerReview> reviews;
+  final String restaurantId;
+
+  @override
+  State<ReviewsScreen> createState() => _ReviewsScreenState();
+}
+
+class _ReviewsScreenState extends State<ReviewsScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.microtask(() {
+      context
+          .read<RestaurantDetailsProvider>()
+          .fetchRestaurantDetails(widget.restaurantId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +37,9 @@ class ReviewsScreen extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              restaurantName,
+              widget.restaurantName,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox.square(dimension: 6.0),
             Text(
               "Reviews",
               style: Theme.of(context).textTheme.titleSmall,
@@ -35,20 +52,35 @@ class ReviewsScreen extends StatelessWidget {
             },
             icon: Icon(Icons.arrow_back_rounded)),
       ),
-      body: Stack(
-        children: [
-          ReviewsScreenBody(reviews: reviews),
-          Positioned(
-            bottom: 8,
-            left: 8,
-            right: 8,
-            child: FilledButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.rate_review_rounded),
-              label: const Text("Add Review"),
-            ),
-          )
-        ],
+      body: Consumer<RestaurantDetailsProvider>(
+        builder: (context, restaurantDetailsProvider, child) {
+          switch (restaurantDetailsProvider.resultState) {
+            case RestaurantDetailsLoadingState():
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case RestaurantDetailsLoadedState(data: final restaurantDetails):
+              return Stack(
+                children: [
+                  ReviewsScreenBody(reviews: restaurantDetails.customerReviews),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: FilledButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.rate_review_rounded),
+                      label: const Text("Add Review"),
+                    ),
+                  ),
+                ],
+              );
+            default:
+              return const Center(
+                child: Text("An unexpected error occured"),
+              );
+          }
+        },
       ),
     );
   }
