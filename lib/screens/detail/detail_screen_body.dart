@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
+import 'package:platescape/static/static.dart';
 import 'package:platescape/ui/ui.dart';
 
 class DetailScreenBody extends StatelessWidget {
@@ -28,6 +29,7 @@ class DetailScreenBody extends StatelessWidget {
             padding: EdgeInsets.all(35),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   restaurantDetails.name,
@@ -69,7 +71,26 @@ class DetailScreenBody extends StatelessWidget {
                   initiallyExpanded: true,
                   children:
                       _generateDrinksTiles(restaurantDetails.menus.drinks),
-                )
+                ),
+                const SizedBox.square(dimension: 16),
+                Center(
+                  child: TextButton.icon(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoute.reviews.route,
+                        arguments: {
+                          "restaurantName": restaurantDetails.name,
+                          "reviews": restaurantDetails.customerReviews,
+                        },
+                      );
+                    },
+                    label: const Text("Reviews"),
+                    icon: const Icon(Icons.arrow_forward_rounded),
+                    iconAlignment: IconAlignment.end,
+                    // style: ,
+                  ),
+                ),
               ],
             ),
           ),
