@@ -10,6 +10,7 @@ class ReviewsScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        padding: const EdgeInsets.only(bottom: 60),
         itemCount: reviews.length,
         itemBuilder: (context, index) {
           final review = reviews[index];

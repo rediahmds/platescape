@@ -35,7 +35,21 @@ class ReviewsScreen extends StatelessWidget {
             },
             icon: Icon(Icons.arrow_back_rounded)),
       ),
-      body: ReviewsScreenBody(reviews: reviews),
+      body: Stack(
+        children: [
+          ReviewsScreenBody(reviews: reviews),
+          Positioned(
+            bottom: 8,
+            left: 8,
+            right: 8,
+            child: FilledButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.rate_review_rounded),
+              label: const Text("Add Review"),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
