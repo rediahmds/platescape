@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/providers/providers.dart';
-import 'package:platescape/static/states/states.dart';
+import 'package:platescape/static/static.dart';
 import 'package:platescape/ui/ui.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:platescape/data/models/detail/restaurant_details_response.dart';
-import 'package:platescape/data/models/models.dart';
+import 'package:platescape/data/data.dart';
 
 class APIServices {
   static const String _baseUrl = "https://restaurant-api.dicoding.dev";

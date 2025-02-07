@@ -10,7 +10,6 @@ class DetailScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Components - image, description, categories, dropdown for menus (opened), dropdown review (closed), add review button
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +87,6 @@ class DetailScreenBody extends StatelessWidget {
                     label: const Text("Reviews"),
                     icon: const Icon(Icons.arrow_forward_rounded),
                     iconAlignment: IconAlignment.end,
-                    // style: ,
                   ),
                 ),
               ],

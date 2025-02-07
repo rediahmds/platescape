@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
-import 'package:platescape/ui/restaurant_card/restaurant_card.dart';
+import 'package:platescape/ui/ui.dart';
 
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard(
@@ -23,8 +23,6 @@ class RestaurantCard extends StatelessWidget {
             CardImage(
               pictureUrl:
                   APIServices().getLowResPictureUrl(restaurant.pictureId),
-              // minWidth: 60,
-              // minHeight: 60,
             ),
             const SizedBox.square(dimension: 8.0),
             Expanded(

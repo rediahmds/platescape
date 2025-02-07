@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/styles/colors/colors.dart';
+import 'package:platescape/styles/styles.dart';
 
 class CardCity extends StatelessWidget {
   const CardCity({super.key, required this.city});
