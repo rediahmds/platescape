@@ -114,12 +114,14 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                                   ),
                                   const SizedBox(height: 16),
                                   SizedBox(
-                                    width: double.infinity,
-                                    child: ElevatedButton(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: FilledButton.icon(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: const Text("Submit"),
+                                      label: const Text("Submit"),
+                                      icon: Icon(Icons.send_rounded),
+                                      iconAlignment: IconAlignment.end,
                                     ),
                                   ),
                                 ],
@@ -130,6 +132,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                       },
                       icon: const Icon(Icons.rate_review_rounded),
                       label: const Text("Add Review"),
+                      iconAlignment: IconAlignment.end,
                     ),
                   ),
                 ],
