@@ -21,6 +21,9 @@ class ReviewsScreen extends StatefulWidget {
 }
 
 class _ReviewsScreenState extends State<ReviewsScreen> {
+  final _nameTextFieldController = TextEditingController();
+  final _reviewMessageTextFieldController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +33,13 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           .read<RestaurantReviewsProvider>()
           .fetchRestaurantReviews(widget.restaurantId);
     });
+  }
+
+  @override
+  void dispose() {
+    _nameTextFieldController.dispose();
+    _reviewMessageTextFieldController.dispose();
+    super.dispose();
   }
 
   @override
@@ -93,9 +103,6 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   }
 
   Future<dynamic> _reviewModalSheet(BuildContext context) {
-    final nameTextFieldController = TextEditingController();
-    final reviewMessageTextFieldController = TextEditingController();
-
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -107,18 +114,18 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
       ),
       builder: (context) {
         return RestaurantReviewForm(
-          nameTextFieldController: nameTextFieldController,
-          reviewMessageTextFieldController: reviewMessageTextFieldController,
+          nameTextFieldController: _nameTextFieldController,
+          reviewMessageTextFieldController: _reviewMessageTextFieldController,
           onPressed: () async {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text("Sending review..."),
               ),
             );
-            final name = nameTextFieldController.text.isEmpty
+            final name = _nameTextFieldController.text.isEmpty
                 ? "Platescape User"
-                : nameTextFieldController.text;
-            final reviewMessage = reviewMessageTextFieldController.text;
+                : _nameTextFieldController.text;
+            final reviewMessage = _reviewMessageTextFieldController.text;
             final id = widget.restaurantId;
             final payload = RestaurantReviewsPayload(
               id: id,
