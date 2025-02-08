@@ -80,7 +80,7 @@ class DetailScreenBody extends StatelessWidget {
                         AppRoute.reviews.route,
                         arguments: {
                           "restaurantName": restaurantDetails.name,
-                          "reviews": restaurantDetails.customerReviews,
+                          "restaurantId": restaurantDetails.id,
                         },
                       );
                     },

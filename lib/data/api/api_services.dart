@@ -16,6 +16,17 @@ class APIServices {
     return RestaurantDetailsResponse.fromJson(response.data);
   }
 
+  Future<List<CustomerReview>> getRestaurantReviews(String id) async {
+    final response = await getRestaurantDetails(id);
+    return response.restaurant.customerReviews;
+  }
+
+  Future<RestaurantReviewsResponse> postRestaurantReview(
+      RestaurantReviewsPayload payload) async {
+    final response = await _dio.post("/review", data: payload.toJson());
+    return RestaurantReviewsResponse.fromJson(response.data);
+  }
+
   String getLowResPictureUrl(String pictureId) =>
       "$_baseUrl/images/small/$pictureId";
 

@@ -13,13 +13,22 @@ void main() {
         create: (context) => APIServices(),
       ),
       ChangeNotifierProvider(
-        create: (context) =>
-            RestaurantListProvider(context.read<APIServices>()),
+        create: (context) => RestaurantListProvider(
+          context.read<APIServices>(),
+        ),
       ),
       ChangeNotifierProvider(
         create: (context) => RestaurantDetailsProvider(
           context.read<APIServices>(),
         ),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => RestaurantReviewsProvider(
+          context.read<APIServices>(),
+        ),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ReviewTextFieldProvider(),
       ),
     ],
     child: App(),
@@ -43,7 +52,9 @@ class App extends StatelessWidget {
               as Map<String, dynamic>;
 
           return ReviewsScreen(
-              restaurantName: args["restaurantName"], reviews: args["reviews"]);
+            restaurantName: args["restaurantName"],
+            restaurantId: args["restaurantId"],
+          );
         },
       },
       title: 'Platescape',
