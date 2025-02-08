@@ -27,6 +27,9 @@ void main() {
           context.read<APIServices>(),
         ),
       ),
+      ChangeNotifierProvider(
+        create: (context) => ReviewTextFieldProvider(),
+      ),
     ],
     child: App(),
   ));

@@ -113,31 +113,40 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
         ),
       ),
       builder: (context) {
-        return RestaurantReviewForm(
-          nameTextFieldController: _nameTextFieldController,
-          reviewMessageTextFieldController: _reviewMessageTextFieldController,
-          onPressed: () async {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Sending review..."),
-              ),
-            );
-            final name = _nameTextFieldController.text.isEmpty
-                ? "Platescape User"
-                : _nameTextFieldController.text;
-            final reviewMessage = _reviewMessageTextFieldController.text;
-            final id = widget.restaurantId;
-            final payload = RestaurantReviewsPayload(
-              id: id,
-              name: name,
-              review: reviewMessage,
-            );
+        return Consumer<ReviewTextFieldProvider>(
+          builder: (context, reviewTextFieldProvider, child) {
+            return RestaurantReviewForm(
+              nameTextFieldController: _nameTextFieldController,
+              reviewMessageTextFieldController:
+                  reviewTextFieldProvider.reviewMessageController,
+              onPressed: () async {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Sending review..."),
+                  ),
+                );
+                final name = _nameTextFieldController.text.isEmpty
+                    ? "Platescape User"
+                    : _nameTextFieldController.text;
+                final reviewMessage =
+                    reviewTextFieldProvider.reviewMessageController.text;
+                final id = widget.restaurantId;
+                final payload = RestaurantReviewsPayload(
+                  id: id,
+                  name: name,
+                  review: reviewMessage,
+                );
 
-            await context
-                .read<RestaurantReviewsProvider>()
-                .addRestaurantReview(payload);
+                await context
+                    .read<RestaurantReviewsProvider>()
+                    .addRestaurantReview(payload);
 
-            Navigator.pop(context);
+                _nameTextFieldController.clear();
+                reviewTextFieldProvider.clear();
+
+                Navigator.pop(context);
+              },
+            );
           },
         );
       },

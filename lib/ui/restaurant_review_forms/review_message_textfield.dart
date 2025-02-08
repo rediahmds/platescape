@@ -10,7 +10,7 @@ class ReviewMessageTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       decoration: InputDecoration(
         labelText: "Write your review",
@@ -19,6 +19,14 @@ class ReviewMessageTextfield extends StatelessWidget {
         ),
       ),
       maxLines: 6,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Plese write a review";
+        } else {
+          return null;
+        }
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

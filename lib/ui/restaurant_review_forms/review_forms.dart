@@ -20,7 +20,7 @@ class RestaurantReviewForm extends StatelessWidget {
         left: 16,
         right: 16,
         top: 16,
-        bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 12,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -37,6 +37,7 @@ class RestaurantReviewForm extends StatelessWidget {
           const SizedBox(height: 16),
           SendReviewButton(
             onPressed: onPressed,
+            reviewMessage: reviewMessageTextFieldController.text,
           ),
         ],
       ),
