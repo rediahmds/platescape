@@ -16,12 +16,15 @@ class DetailScreenBody extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CardImage(
-              pictureUrl: APIServices()
-                  .getHighResPictureUrl(restaurantDetails.pictureId),
-              maxWidth: MediaQuery.of(context).size.width,
-              maxHeight: 500,
-              borderRadius: 25.0,
+            child: Hero(
+              tag: restaurantDetails.id,
+              child: CardImage(
+                pictureUrl: APIServices()
+                    .getHighResPictureUrl(restaurantDetails.pictureId),
+                maxWidth: MediaQuery.of(context).size.width,
+                maxHeight: 500,
+                borderRadius: 25.0,
+              ),
             ),
           ),
           Padding(

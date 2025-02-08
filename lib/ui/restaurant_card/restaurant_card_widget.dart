@@ -20,9 +20,12 @@ class RestaurantCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            CardImage(
-              pictureUrl:
-                  APIServices().getLowResPictureUrl(restaurant.pictureId),
+            Hero(
+              tag: restaurant.id,
+              child: CardImage(
+                pictureUrl:
+                    APIServices().getLowResPictureUrl(restaurant.pictureId),
+              ),
             ),
             const SizedBox.square(dimension: 8.0),
             Expanded(
