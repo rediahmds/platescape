@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/data/data.dart';
 import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/static.dart';
 import 'package:provider/provider.dart';
+import 'package:platescape/ui/ui.dart';
 
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({
@@ -71,66 +73,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                     right: 8,
                     child: FilledButton.icon(
                       onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          showDragHandle: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(16.0),
-                            ),
-                          ),
-                          builder: (context) {
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                left: 16,
-                                right: 16,
-                                top: 16,
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom +
-                                        16,
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Write a Review",
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      labelText: "Your Name",
-                                      border: OutlineInputBorder(),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  TextField(
-                                    decoration: InputDecoration(
-                                      labelText: "Your Review",
-                                      border: OutlineInputBorder(),
-                                    ),
-                                    maxLines: 6,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: FilledButton.icon(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      label: const Text("Submit"),
-                                      icon: Icon(Icons.send_rounded),
-                                      iconAlignment: IconAlignment.end,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
+                        _reviewModalSheet(context);
                       },
                       icon: const Icon(Icons.rate_review_rounded),
                       label: const Text("Add Review"),
@@ -146,6 +89,51 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           }
         },
       ),
+    );
+  }
+
+  Future<dynamic> _reviewModalSheet(BuildContext context) {
+    final nameTextFieldController = TextEditingController();
+    final reviewMessageTextFieldController = TextEditingController();
+
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(16.0),
+        ),
+      ),
+      builder: (context) {
+        return RestaurantReviewForm(
+          nameTextFieldController: nameTextFieldController,
+          reviewMessageTextFieldController: reviewMessageTextFieldController,
+          onPressed: () async {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Sending review..."),
+              ),
+            );
+            final name = nameTextFieldController.text.isEmpty
+                ? "Platescape User"
+                : nameTextFieldController.text;
+            final reviewMessage = reviewMessageTextFieldController.text;
+            final id = widget.restaurantId;
+            final payload = RestaurantReviewsPayload(
+              id: id,
+              name: name,
+              review: reviewMessage,
+            );
+
+            await context
+                .read<RestaurantReviewsProvider>()
+                .addRestaurantReview(payload);
+
+            Navigator.pop(context);
+          },
+        );
+      },
     );
   }
 }
