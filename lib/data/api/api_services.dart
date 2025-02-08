@@ -23,7 +23,7 @@ class APIServices {
 
   Future<RestaurantReviewsResponse> postRestaurantReview(
       RestaurantReviewsPayload payload) async {
-    final response = await _dio.post("/review", data: payload);
+    final response = await _dio.post("/review", data: payload.toJson());
     return RestaurantReviewsResponse.fromJson(response.data);
   }
 
