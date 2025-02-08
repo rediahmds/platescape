@@ -22,6 +22,11 @@ void main() {
           context.read<APIServices>(),
         ),
       ),
+      ChangeNotifierProvider(
+        create: (context) => RestaurantReviewsProvider(
+          context.read<APIServices>(),
+        ),
+      ),
     ],
     child: App(),
   ));

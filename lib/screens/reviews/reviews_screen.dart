@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/screens.dart';
-import 'package:platescape/static/states/restaurant_details_result_state.dart';
+import 'package:platescape/static/static.dart';
 import 'package:provider/provider.dart';
 
 class ReviewsScreen extends StatefulWidget {
@@ -25,8 +25,8 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 
     Future.microtask(() {
       context
-          .read<RestaurantDetailsProvider>()
-          .fetchRestaurantDetails(widget.restaurantId);
+          .read<RestaurantReviewsProvider>()
+          .fetchRestaurantReviews(widget.restaurantId);
     });
   }
 
@@ -52,17 +52,19 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
             },
             icon: Icon(Icons.arrow_back_rounded)),
       ),
-      body: Consumer<RestaurantDetailsProvider>(
-        builder: (context, restaurantDetailsProvider, child) {
-          switch (restaurantDetailsProvider.resultState) {
-            case RestaurantDetailsLoadingState():
+      body: Consumer<RestaurantReviewsProvider>(
+        builder: (context, restaurantReviewsProvider, child) {
+          switch (restaurantReviewsProvider.resultState) {
+            case RestaurantReviewsLoadingState():
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            case RestaurantDetailsLoadedState(data: final restaurantDetails):
+            case RestaurantReviewsLoadedState(
+                customerReviews: final customerReviews
+              ):
               return Stack(
                 children: [
-                  ReviewsScreenBody(reviews: restaurantDetails.customerReviews),
+                  ReviewsScreenBody(reviews: customerReviews),
                   Positioned(
                     bottom: 8,
                     left: 8,
