@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
             case RestaurantListLoadedState(data: final restaurantList):
               return Consumer<RestaurantSearchProvider>(
                 builder: (context, searchProvider, child) {
-                  final searchController = searchProvider.searchController;
+                  // final searchController = searchProvider.searchController;
 
                   switch (searchProvider.resultState) {
                     case RestaurantSearchLoadingState():
@@ -56,31 +56,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       return const Center(
                         child: Text("No restaurant found with the given query"),
                       );
-                    case RestaurantSearchEmptyState():
-                      return NewWidget(
-                        restaurantList: restaurantList,
-                        searchController: searchController,
-                        onSubmitted: (_) async {
-                          await searchProvider
-                              .searchRestaurant(searchController.text);
-                          searchController.clear();
-                        },
-                      );
                     case RestaurantSearchLoadedState(
                         restaurantList: final searchResult
                       ):
                       return NewWidget(
                         restaurantList: searchResult,
-                        searchController: searchController,
+                        searchController: searchProvider.searchController,
                         onSubmitted: (_) async {
-                          await searchProvider
-                              .searchRestaurant(searchController.text);
-                          searchController.clear();
+                          await searchProvider.searchRestaurant(
+                            searchProvider.searchController.text,
+                          );
+                          // searchController.clear();
                         },
                       );
                     default:
-                      return Center(
-                        child: const Text("An unexpected error occured"),
+                      return NewWidget(
+                        restaurantList: restaurantList,
+                        searchController: searchProvider.searchController,
+                        onSubmitted: (_) async {
+                          await searchProvider.searchRestaurant(
+                              searchProvider.searchController.text);
+                        },
                       );
                   }
                 },
@@ -120,7 +116,6 @@ class NewWidget extends StatelessWidget {
           onSubmitted: onSubmitted,
         ),
         Expanded(
-          // TODO: Implement search provider here
           child: RestaurantListView(restaurantList: restaurantList),
         ),
       ],
