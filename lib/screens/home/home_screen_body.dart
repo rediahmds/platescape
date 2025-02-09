@@ -4,6 +4,7 @@ import 'package:platescape/ui/ui.dart';
 import 'package:provider/provider.dart';
 import 'package:platescape/providers/providers.dart';
 import 'package:platescape/static/static.dart';
+import 'package:platescape/screens/screens.dart';
 
 class HomeScreenBody extends StatelessWidget {
   const HomeScreenBody({
@@ -25,9 +26,7 @@ class HomeScreenBody extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           case RestaurantSearchNotFoundState():
-            return const Center(
-              child: Text("No restaurant found with the given query"),
-            );
+            return SearchNotFoundScreen();
           default:
             final searchState = searchProvider.resultState;
             final resultList = searchState is RestaurantSearchLoadedState

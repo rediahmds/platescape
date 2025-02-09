@@ -34,4 +34,8 @@ class RestaurantSearchProvider extends ChangeNotifier {
     _resultState = state;
     notifyListeners();
   }
+
+  void resetSearch() {
+    _updateState(RestaurantSearchEmptyState());
+  }
 }
