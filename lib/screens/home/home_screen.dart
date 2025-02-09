@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/data/models/list/restaurant.dart';
 import 'package:platescape/providers/providers.dart';
+import 'package:platescape/screens/home/home.dart';
 import 'package:platescape/static/static.dart';
 import 'package:platescape/ui/ui.dart';
 import 'package:provider/provider.dart';
@@ -43,41 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: CircularProgressIndicator(),
               );
             case RestaurantListLoadedState(data: final restaurantList):
-              return Consumer<RestaurantSearchProvider>(
-                builder: (context, searchProvider, child) {
-                  switch (searchProvider.resultState) {
-                    case RestaurantSearchLoadingState():
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    case RestaurantSearchNotFoundState():
-                      return const Center(
-                        child: Text("No restaurant found with the given query"),
-                      );
-                    case RestaurantSearchLoadedState(
-                        restaurantList: final searchResult
-                      ):
-                      return NewWidget(
-                        restaurantList: searchResult,
-                        searchController: searchProvider.searchController,
-                        onSubmitted: (_) async {
-                          await searchProvider.searchRestaurant(
-                            searchProvider.searchController.text,
-                          );
-                        },
-                      );
-                    default:
-                      return NewWidget(
-                        restaurantList: restaurantList,
-                        searchController: searchProvider.searchController,
-                        onSubmitted: (_) async {
-                          await searchProvider.searchRestaurant(
-                              searchProvider.searchController.text);
-                        },
-                      );
-                  }
-                },
-              );
+              return HomeScreenBody(restaurantList: restaurantList);
             default:
               return Center(
                 child: Text(
