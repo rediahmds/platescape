@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/provider/platescape_providers.dart';
+import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/screens.dart';
-import 'package:platescape/static/states/states.dart';
+import 'package:platescape/static/static.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -30,19 +30,19 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: Ink(
-          decoration: ShapeDecoration(
-            color: Theme.of(context).colorScheme.onSecondary,
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            constraints: BoxConstraints(
-              maxWidth: 20,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: Ink(
+            decoration: ShapeDecoration(
+              color: Theme.of(context).colorScheme.onSecondary,
+              shape: CircleBorder(),
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_rounded),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_rounded),
+            ),
           ),
         ),
         backgroundColor: Colors.transparent,

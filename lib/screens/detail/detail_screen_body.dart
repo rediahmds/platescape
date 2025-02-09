@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
+import 'package:platescape/static/static.dart';
 import 'package:platescape/ui/ui.dart';
 
 class DetailScreenBody extends StatelessWidget {
@@ -9,25 +10,28 @@ class DetailScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Components - image, description, categories, dropdown for menus (opened), dropdown review (closed), add review button
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: CardImage(
-              pictureUrl: APIServices()
-                  .getHighResPictureUrl(restaurantDetails.pictureId),
-              maxWidth: MediaQuery.of(context).size.width,
-              maxHeight: 500,
-              borderRadius: 25.0,
+            child: Hero(
+              tag: restaurantDetails.id,
+              child: CardImage(
+                pictureUrl: APIServices()
+                    .getHighResPictureUrl(restaurantDetails.pictureId),
+                maxWidth: MediaQuery.of(context).size.width,
+                maxHeight: 500,
+                borderRadius: 25.0,
+              ),
             ),
           ),
           Padding(
             padding: EdgeInsets.all(35),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   restaurantDetails.name,
@@ -69,7 +73,25 @@ class DetailScreenBody extends StatelessWidget {
                   initiallyExpanded: true,
                   children:
                       _generateDrinksTiles(restaurantDetails.menus.drinks),
-                )
+                ),
+                const SizedBox.square(dimension: 16),
+                Center(
+                  child: TextButton.icon(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoute.reviews.route,
+                        arguments: {
+                          "restaurantName": restaurantDetails.name,
+                          "restaurantId": restaurantDetails.id,
+                        },
+                      );
+                    },
+                    label: const Text("Reviews"),
+                    icon: const Icon(Icons.arrow_forward_rounded),
+                    iconAlignment: IconAlignment.end,
+                  ),
+                ),
               ],
             ),
           ),

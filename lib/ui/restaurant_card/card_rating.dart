@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/styles/styles.dart';
 
 class CardRating extends StatelessWidget {
   const CardRating({super.key, required this.rating});
@@ -10,7 +11,10 @@ class CardRating extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(Icons.star_rounded),
+        Icon(
+          Icons.star_rounded,
+          color: PlatescapeColors.yellow.color,
+        ),
         const SizedBox.square(dimension: 4.0),
         Text(
           rating.toString(),

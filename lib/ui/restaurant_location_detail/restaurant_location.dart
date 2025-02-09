@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/styles/styles.dart';
 import 'package:platescape/ui/ui.dart';
 
 class RestaurantLocation extends StatelessWidget {
@@ -16,7 +17,10 @@ class RestaurantLocation extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(Icons.location_pin),
+        Icon(
+          Icons.location_pin,
+          color: PlatescapeColors.green.color,
+        ),
         const SizedBox.square(dimension: 6.0),
         RestaurantAddress(address: address, city: city),
       ],

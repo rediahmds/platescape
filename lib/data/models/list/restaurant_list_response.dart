@@ -1,4 +1,4 @@
-import 'package:platescape/data/models/models.dart';
+import 'package:platescape/data/data.dart';
 
 class RestaurantListResponse {
   RestaurantListResponse({

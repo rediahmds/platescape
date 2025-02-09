@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/styles/styles.dart';
 
 class CardCity extends StatelessWidget {
   const CardCity({super.key, required this.city});
@@ -9,7 +10,10 @@ class CardCity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.location_city_rounded),
+        Icon(
+          Icons.location_city_rounded,
+          color: PlatescapeColors.green.color,
+        ),
         const SizedBox.square(dimension: 4.0),
         Text(
           city,

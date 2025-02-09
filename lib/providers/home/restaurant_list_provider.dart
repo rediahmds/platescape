@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
-import 'package:platescape/data/api/api_services.dart';
-import 'package:platescape/static/states/states.dart';
+import 'package:platescape/data/data.dart';
+import 'package:platescape/static/static.dart';
 
 class RestaurantListProvider extends ChangeNotifier {
   RestaurantListProvider(this._apiServices);

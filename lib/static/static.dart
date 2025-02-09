@@ -1,2 +1,2 @@
-export 'routes/app_route.dart';
+export 'routes/routes.dart';
 export 'states/states.dart';
