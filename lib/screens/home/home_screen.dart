@@ -45,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
             case RestaurantListLoadedState(data: final restaurantList):
               return Consumer<RestaurantSearchProvider>(
                 builder: (context, searchProvider, child) {
-
                   switch (searchProvider.resultState) {
                     case RestaurantSearchLoadingState():
                       return const Center(
@@ -65,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           await searchProvider.searchRestaurant(
                             searchProvider.searchController.text,
                           );
-                          // searchController.clear();
                         },
                       );
                     default:
