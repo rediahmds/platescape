@@ -27,6 +27,11 @@ class APIServices {
     return RestaurantReviewsResponse.fromJson(response.data);
   }
 
+  Future<RestaurantSearchResponse> searchRestaurant(String query) async {
+    final response = await _dio.get("/search", queryParameters: {"q": query});
+    return RestaurantSearchResponse.fromJson(response.data);
+  }
+
   String getLowResPictureUrl(String pictureId) =>
       "$_baseUrl/images/small/$pictureId";
 
