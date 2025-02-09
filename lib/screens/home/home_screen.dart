@@ -45,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
             case RestaurantListLoadedState(data: final restaurantList):
               return Consumer<RestaurantSearchProvider>(
                 builder: (context, searchProvider, child) {
-                  // final searchController = searchProvider.searchController;
 
                   switch (searchProvider.resultState) {
                     case RestaurantSearchLoadingState():
