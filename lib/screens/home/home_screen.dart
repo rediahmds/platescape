@@ -42,7 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: CircularProgressIndicator(),
               );
             case RestaurantListLoadedState(data: final restaurantList):
-              return RestaurantListView(restaurantList: restaurantList);
+              return Column(
+                children: [
+                  RestaurantSearchBar(),
+                  Expanded(
+                    child: RestaurantListView(restaurantList: restaurantList),
+                  ),
+                ],
+              );
             default:
               return Center(
                 child: Text(
