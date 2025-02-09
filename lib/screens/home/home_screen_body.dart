@@ -28,17 +28,14 @@ class HomeScreenBody extends StatelessWidget {
             return const Center(
               child: Text("No restaurant found with the given query"),
             );
-          case RestaurantSearchLoadedState(restaurantList: final searchResult):
-            return RestaurantListSearchable(
-              restaurantList: searchResult,
-              searchController: searchController,
-              onSubmitted: (_) async {
-                await searchProvider.searchRestaurant(searchController.text);
-              },
-            );
           default:
+            final searchState = searchProvider.resultState;
+            final resultList = searchState is RestaurantSearchLoadedState
+                ? searchState.restaurantList
+                : restaurantList;
+
             return RestaurantListSearchable(
-              restaurantList: restaurantList,
+              restaurantList: resultList,
               searchController: searchController,
               onSubmitted: (_) async {
                 await searchProvider.searchRestaurant(searchController.text);
