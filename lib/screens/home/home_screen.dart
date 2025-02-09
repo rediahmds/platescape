@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/data/models/list/restaurant.dart';
 import 'package:platescape/providers/providers.dart';
 import 'package:platescape/static/static.dart';
 import 'package:platescape/ui/ui.dart';
@@ -42,13 +43,47 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: CircularProgressIndicator(),
               );
             case RestaurantListLoadedState(data: final restaurantList):
-              return Column(
-                children: [
-                  RestaurantSearchBar(),
-                  Expanded(
-                    child: RestaurantListView(restaurantList: restaurantList),
-                  ),
-                ],
+              return Consumer<RestaurantSearchProvider>(
+                builder: (context, searchProvider, child) {
+                  final searchController = searchProvider.searchController;
+
+                  switch (searchProvider.resultState) {
+                    case RestaurantSearchLoadingState():
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    case RestaurantSearchNotFoundState():
+                      return const Center(
+                        child: Text("No restaurant found with the given query"),
+                      );
+                    case RestaurantSearchEmptyState():
+                      return NewWidget(
+                        restaurantList: restaurantList,
+                        searchController: searchController,
+                        onSubmitted: (_) async {
+                          await searchProvider
+                              .searchRestaurant(searchController.text);
+                          searchController.clear();
+                        },
+                      );
+                    case RestaurantSearchLoadedState(
+                        restaurantList: final searchResult
+                      ):
+                      return NewWidget(
+                        restaurantList: searchResult,
+                        searchController: searchController,
+                        onSubmitted: (_) async {
+                          await searchProvider
+                              .searchRestaurant(searchController.text);
+                          searchController.clear();
+                        },
+                      );
+                    default:
+                      return Center(
+                        child: const Text("An unexpected error occured"),
+                      );
+                  }
+                },
               );
             default:
               return Center(
@@ -60,6 +95,35 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
       ),
+    );
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget({
+    super.key,
+    required this.restaurantList,
+    required this.searchController,
+    required this.onSubmitted,
+  });
+
+  final List<Restaurant> restaurantList;
+  final SearchController searchController;
+  final Function(String) onSubmitted;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        RestaurantSearchBar(
+          searchController: searchController,
+          onSubmitted: onSubmitted,
+        ),
+        Expanded(
+          // TODO: Implement search provider here
+          child: RestaurantListView(restaurantList: restaurantList),
+        ),
+      ],
     );
   }
 }
