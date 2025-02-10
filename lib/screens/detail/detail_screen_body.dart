@@ -42,18 +42,20 @@ class DetailScreenBody extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     RestaurantLocation(
-                        city: restaurantDetails.city,
-                        address: restaurantDetails.address),
-                    const SizedBox.square(dimension: 8),
+                      city: restaurantDetails.city,
+                      address: restaurantDetails.address,
+                    ),
+                    const SizedBox.square(dimension: 8.0),
                     RestaurantRatings(
-                        rating: restaurantDetails.rating,
-                        totalReviews: restaurantDetails.customerReviews.length)
+                      rating: restaurantDetails.rating,
+                      totalReviews: restaurantDetails.customerReviews.length,
+                    )
                   ],
                 ),
                 const SizedBox.square(dimension: 8.0),
                 Text(
                   restaurantDetails.description,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox.square(dimension: 8.0),
                 ExpansionTile(
