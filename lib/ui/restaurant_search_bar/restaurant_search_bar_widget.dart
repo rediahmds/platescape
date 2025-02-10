@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class RestaurantSearchBar extends StatelessWidget {
   const RestaurantSearchBar({
@@ -28,6 +30,17 @@ class RestaurantSearchBar extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Icon(Icons.search_rounded),
         ),
+        trailing: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton.filledTonal(
+              onPressed: () {
+                context.read<RestaurantSearchProvider>().resetSearch();
+              },
+              icon: Icon(Icons.clear_rounded),
+            ),
+          )
+        ],
       ),
     );
   }

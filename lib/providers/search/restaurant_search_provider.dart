@@ -36,6 +36,7 @@ class RestaurantSearchProvider extends ChangeNotifier {
   }
 
   void resetSearch() {
+    _searchController.clear();
     _updateState(RestaurantSearchEmptyState());
   }
 }
