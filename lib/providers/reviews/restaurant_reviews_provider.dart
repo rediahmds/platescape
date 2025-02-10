@@ -18,14 +18,12 @@ class RestaurantReviewsProvider extends ChangeNotifier {
       final result = await _apiServices.getRestaurantReviews(restaurantId);
       _updateState(RestaurantReviewsLoadedState(result));
     } on DioException catch (dioException) {
-      if (dioException.response != null) {
-        _updateState(RestaurantReviewsErrorState(
-            dioException.response!.statusMessage ??
-                "An unexpected error occured"));
-      } else {
-        _updateState(RestaurantReviewsErrorState(
-            dioException.message ?? "An unexpected error occurred"));
-      }
+      final dioMessage = _apiServices.parseDioException(dioException);
+      _updateState(RestaurantReviewsErrorState(dioMessage));
+    } catch (e) {
+      _updateState(
+        RestaurantReviewsErrorState("An unexpected error occurred."),
+      );
     }
   }
 
@@ -35,14 +33,12 @@ class RestaurantReviewsProvider extends ChangeNotifier {
       final result = await _apiServices.postRestaurantReview(payload);
       _updateState(RestaurantReviewsLoadedState(result.customerReviews));
     } on DioException catch (dioException) {
-      if (dioException.response != null) {
-        _updateState(RestaurantReviewsErrorState(
-            dioException.response!.statusMessage ??
-                "An unexpected error occured"));
-      } else {
-        _updateState(RestaurantReviewsErrorState(
-            dioException.message ?? "An unexpected error occurred"));
-      }
+      final dioMessage = _apiServices.parseDioException(dioException);
+      _updateState(RestaurantReviewsErrorState(dioMessage));
+    } catch (e) {
+      _updateState(
+        RestaurantReviewsErrorState("An unexpexted error occurred."),
+      );
     }
   }
 

@@ -30,6 +30,11 @@ void main() {
       ChangeNotifierProvider(
         create: (context) => ReviewTextFieldProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (context) => RestaurantSearchProvider(
+          context.read<APIServices>(),
+        ),
+      ),
     ],
     child: App(),
   ));

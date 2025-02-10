@@ -27,6 +27,11 @@ class APIServices {
     return RestaurantReviewsResponse.fromJson(response.data);
   }
 
+  Future<RestaurantSearchResponse> searchRestaurant(String query) async {
+    final response = await _dio.get("/search", queryParameters: {"q": query});
+    return RestaurantSearchResponse.fromJson(response.data);
+  }
+
   String getLowResPictureUrl(String pictureId) =>
       "$_baseUrl/images/small/$pictureId";
 
@@ -35,4 +40,30 @@ class APIServices {
 
   String getHighResPictureUrl(String pictureId) =>
       "$_baseUrl/images/large/$pictureId";
+
+  String parseDioException(DioException dioException) {
+    switch (dioException.type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.sendTimeout:
+        return "Connection timeout. Please try again.";
+
+      case DioExceptionType.badResponse:
+        final statusCode = dioException.response?.statusCode;
+        if (statusCode != null) {
+          return "Server error ($statusCode). Please try again later.";
+        }
+
+        return "Received invalid response from the server.";
+
+      case DioExceptionType.cancel:
+        return "Request cancelled.";
+
+      case DioExceptionType.connectionError:
+        return "No internet connection. Please check your network.";
+
+      default:
+        return "Unexpected HTTP error occurred. Please try again later.";
+    }
+  }
 }

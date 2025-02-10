@@ -21,8 +21,12 @@ class RestaurantListProvider extends ChangeNotifier {
           ? RestaurantListErrorState(result.message)
           : RestaurantListLoadedState(result.restaurants));
     } on DioException catch (dioException) {
-      _updateState(RestaurantListErrorState(
-          dioException.message ?? "An unexpected error occurred"));
+      final dioMessage = _apiServices.parseDioException(dioException);
+      _updateState(RestaurantListErrorState(dioMessage));
+    } catch (e) {
+      _updateState(
+        RestaurantListErrorState("An unexpected error occurred."),
+      );
     }
   }
 

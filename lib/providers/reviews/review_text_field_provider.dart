@@ -10,6 +10,9 @@ class ReviewTextFieldProvider extends ChangeNotifier {
       TextEditingController();
   TextEditingController get reviewMessageController => _reviewMessageController;
 
+  final TextEditingController _nameController = TextEditingController();
+  TextEditingController get nameController => _nameController;
+
   ReviewTextFieldState _reviewTextFieldState = ReviewTextFieldEmptyState();
   ReviewTextFieldState get reviewTextFieldState => _reviewTextFieldState;
 
@@ -30,12 +33,14 @@ class ReviewTextFieldProvider extends ChangeNotifier {
 
   void clear() {
     _reviewMessageController.clear();
+    _nameController.clear();
     _updateState(ReviewTextFieldEmptyState());
   }
 
   @override
   void dispose() {
     _reviewMessageController.dispose();
+    _nameController.dispose();
     super.dispose();
   }
 }
