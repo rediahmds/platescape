@@ -43,12 +43,12 @@ class APIServices {
 
   String parseDioException(DioException dioException) {
     switch (dioException.type) {
-      case DioException.connectionTimeout:
-      case DioException.receiveTimeout:
-      case DioException.sendTimeout:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.sendTimeout:
         return "Connection timeout. Please try again.";
 
-      case DioException.badResponse:
+      case DioExceptionType.badResponse:
         final statusCode = dioException.response?.statusCode;
         if (statusCode != null) {
           return "Server error ($statusCode). Please try again later.";
@@ -56,10 +56,10 @@ class APIServices {
 
         return "Received invalid response from the server.";
 
-      case DioException.requestCancelled:
+      case DioExceptionType.cancel:
         return "Request cancelled.";
 
-      case DioException.connectionError:
+      case DioExceptionType.connectionError:
         return "No internet connection. Please check your network.";
 
       default:
