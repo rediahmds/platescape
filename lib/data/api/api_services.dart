@@ -40,4 +40,30 @@ class APIServices {
 
   String getHighResPictureUrl(String pictureId) =>
       "$_baseUrl/images/large/$pictureId";
+
+  String parseDioException(DioException dioException) {
+    switch (dioException.type) {
+      case DioException.connectionTimeout:
+      case DioException.receiveTimeout:
+      case DioException.sendTimeout:
+        return "Connection timeout. Please try again.";
+
+      case DioException.badResponse:
+        final statusCode = dioException.response?.statusCode;
+        if (statusCode != null) {
+          return "Server error ($statusCode). Please try again later.";
+        }
+
+        return "Received invalid response from the server.";
+
+      case DioException.requestCancelled:
+        return "Request cancelled.";
+
+      case DioException.connectionError:
+        return "No internet connection. Please check your network.";
+
+      default:
+        return "Unexpected error occurred. Please try again later.";
+    }
+  }
 }
