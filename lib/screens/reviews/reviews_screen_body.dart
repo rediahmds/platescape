@@ -8,11 +8,9 @@ class ReviewsScreenBody extends StatelessWidget {
   const ReviewsScreenBody({
     super.key,
     required this.restaurantId,
-    required this.nameController,
   });
 
   final String restaurantId;
-  final TextEditingController nameController;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +28,7 @@ class ReviewsScreenBody extends StatelessWidget {
                     left: 8,
                     right: 8,
                     child: WriteReviewButton(
-                      onPressed: () => showReviewModal(
-                          context, restaurantId, nameController),
+                      onPressed: () => showReviewModal(context, restaurantId),
                     )),
               ],
             );

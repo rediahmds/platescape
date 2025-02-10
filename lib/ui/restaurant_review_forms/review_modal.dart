@@ -4,8 +4,7 @@ import 'package:platescape/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:platescape/ui/ui.dart';
 
-void showReviewModal(BuildContext context, String restaurantId,
-    TextEditingController nameController) {
+void showReviewModal(BuildContext context, String restaurantId) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -16,10 +15,13 @@ void showReviewModal(BuildContext context, String restaurantId,
     builder: (context) {
       return Consumer<ReviewTextFieldProvider>(
         builder: (context, reviewTextFieldProvider, child) {
+          final nameController = reviewTextFieldProvider.nameController;
+          final reviewController =
+              reviewTextFieldProvider.reviewMessageController;
+
           return RestaurantReviewForm(
             nameTextFieldController: nameController,
-            reviewMessageTextFieldController:
-                reviewTextFieldProvider.reviewMessageController,
+            reviewMessageTextFieldController: reviewController,
             onPressed: () async {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text("Sending review...")),
@@ -29,8 +31,7 @@ void showReviewModal(BuildContext context, String restaurantId,
                   ? "Platescape User"
                   : nameController.text;
 
-              final reviewMessage =
-                  reviewTextFieldProvider.reviewMessageController.text;
+              final reviewMessage = reviewController.text;
 
               final payload = RestaurantReviewsPayload(
                 id: restaurantId,

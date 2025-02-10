@@ -18,8 +18,6 @@ class ReviewsScreen extends StatefulWidget {
 }
 
 class _ReviewsScreenState extends State<ReviewsScreen> {
-  final _nameTextFieldController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -29,12 +27,6 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           .read<RestaurantReviewsProvider>()
           .fetchRestaurantReviews(widget.restaurantId);
     });
-  }
-
-  @override
-  void dispose() {
-    _nameTextFieldController.dispose();
-    super.dispose();
   }
 
   @override
@@ -54,14 +46,13 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           ],
         ),
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back_rounded)),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_rounded),
+        ),
       ),
-      body: ReviewsScreenBody(
-          restaurantId: widget.restaurantId,
-          nameController: _nameTextFieldController),
+      body: ReviewsScreenBody(restaurantId: widget.restaurantId),
     );
   }
 }
