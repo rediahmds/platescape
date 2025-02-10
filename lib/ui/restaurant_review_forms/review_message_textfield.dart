@@ -21,7 +21,7 @@ class ReviewMessageTextfield extends StatelessWidget {
       maxLines: 6,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return "Plese write a review";
+          return "Review cannot be empty";
         } else {
           return null;
         }
