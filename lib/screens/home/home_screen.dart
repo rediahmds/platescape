@@ -43,8 +43,15 @@ class _HomeScreenState extends State<HomeScreen> {
               return const Center(
                 child: CircularProgressIndicator(),
               );
+
             case RestaurantListLoadedState(data: final restaurantList):
               return HomeScreenBody(restaurantList: restaurantList);
+
+            case RestaurantListErrorState(error: final message):
+              return Center(
+                child: Text(message),
+              );
+
             default:
               return Center(
                 child: Text(

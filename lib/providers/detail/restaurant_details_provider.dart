@@ -21,8 +21,12 @@ class RestaurantDetailsProvider extends ChangeNotifier {
           ? RestaurantDetailsErrorState(result.message)
           : RestaurantDetailsLoadedState(result.restaurant));
     } on DioException catch (dioException) {
-      _updateState(RestaurantDetailsErrorState(dioException.message ??
-          "An unexpected error occurred while fetching restaurant details"));
+      final dioMessage = _apiServices.parseDioException(dioException);
+      _updateState(RestaurantDetailsErrorState(dioMessage));
+    } catch (e) {
+      _updateState(
+        RestaurantDetailsErrorState("An unexpected error occurred."),
+      );
     }
   }
 

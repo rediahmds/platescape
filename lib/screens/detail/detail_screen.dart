@@ -55,8 +55,15 @@ class _DetailScreenState extends State<DetailScreen> {
               return const Center(
                 child: CircularProgressIndicator(),
               );
+
             case RestaurantDetailsLoadedState(data: final restaurantDetails):
               return DetailScreenBody(restaurantDetails: restaurantDetails);
+
+            case RestaurantDetailsErrorState(error: final message):
+              return Center(
+                child: Text(message),
+              );
+
             default:
               return const Center(
                 child: Text("An unexpected error occurred"),

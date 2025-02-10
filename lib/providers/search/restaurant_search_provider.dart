@@ -23,9 +23,11 @@ class RestaurantSearchProvider extends ChangeNotifier {
             : RestaurantSearchLoadedState(result.restaurants),
       );
     } on DioException catch (dioException) {
+      final dioMessage = _apiServices.parseDioException(dioException);
+      _updateState(RestaurantSearchErrorState(dioMessage));
+    } catch (e) {
       _updateState(
-        RestaurantSearchErrorState(
-            dioException.message ?? "An unexpected error occured"),
+        RestaurantSearchErrorState("An unexpected error occurred."),
       );
     }
   }

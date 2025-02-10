@@ -25,8 +25,15 @@ class HomeScreenBody extends StatelessWidget {
             return const Center(
               child: CircularProgressIndicator(),
             );
+
           case RestaurantSearchNotFoundState():
             return SearchNotFoundScreen();
+
+          case RestaurantSearchErrorState(error: final message):
+            return Center(
+              child: Text(message),
+            );
+
           default:
             final searchState = searchProvider.resultState;
             final resultList = searchState is RestaurantSearchLoadedState

@@ -18,7 +18,10 @@ class ReviewsScreenBody extends StatelessWidget {
       builder: (context, restaurantReviewsProvider, child) {
         switch (restaurantReviewsProvider.resultState) {
           case RestaurantReviewsLoadingState():
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+
           case RestaurantReviewsLoadedState(customerReviews: final reviews):
             return Stack(
               children: [
@@ -32,6 +35,12 @@ class ReviewsScreenBody extends StatelessWidget {
                     )),
               ],
             );
+
+          case RestaurantReviewsErrorState(error: final message):
+            return Center(
+              child: Text(message),
+            );
+
           default:
             return const Center(child: Text("An unexpected error occurred"));
         }

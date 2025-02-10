@@ -63,7 +63,7 @@ class APIServices {
         return "No internet connection. Please check your network.";
 
       default:
-        return "Unexpected error occurred. Please try again later.";
+        return "Unexpected HTTP error occurred. Please try again later.";
     }
   }
 }
