@@ -3,11 +3,16 @@ import 'package:platescape/data/data.dart';
 import 'package:platescape/ui/ui.dart';
 
 class RestaurantCard extends StatelessWidget {
-  const RestaurantCard(
-      {super.key, required this.restaurant, required this.onTap});
+  const RestaurantCard({
+    super.key,
+    required this.restaurant,
+    required this.onTap,
+    this.showFavoriteButton = false,
+  });
 
   final Restaurant restaurant;
   final Function() onTap;
+  final bool showFavoriteButton;
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +39,29 @@ class RestaurantCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    restaurant.name,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox.square(
-                    dimension: 8.0,
-                  ),
-                  CardCity(city: restaurant.city),
-                  const SizedBox.square(
-                    dimension: 8.0,
-                  ),
-                  CardRating(rating: restaurant.rating),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        restaurant.name,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox.square(
+                        dimension: 8.0,
+                      ),
+                      CardCity(city: restaurant.city),
+                      const SizedBox.square(
+                        dimension: 8.0,
+                      ),
+                      CardRating(rating: restaurant.rating),
+                      if (showFavoriteButton)
+                        IconButton(
+                          icon: Icon(Icons.favorite_rounded),
+                          onPressed: () {}, // TODO: Use state manager
+                        ),
+                    ],
+                  )
                 ],
               ),
             ),
