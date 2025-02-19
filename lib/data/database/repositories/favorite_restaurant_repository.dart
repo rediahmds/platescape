@@ -26,6 +26,22 @@ class FavoriteRestaurantRepository {
     return restaurants;
   }
 
+  Future<Restaurant> getFavoriteById(String id) async {
+    final db = await _sqliteService.database;
+    final results = await db.query(
+      _sqliteService.favoriteTable,
+      where: "id = ?",
+      whereArgs: [id],
+    );
+    final restaurant = results
+        .map(
+          (res) => Restaurant.fromJson(res),
+        )
+        .first;
+
+    return restaurant;
+  }
+
   Future<int> removeFavorite(String id) async {
     final db = await _sqliteService.database;
     final result = await db.delete(
