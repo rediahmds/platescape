@@ -34,18 +34,19 @@ class RestaurantCard extends StatelessWidget {
             ),
             const SizedBox.square(dimension: 8.0),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         restaurant.name,
                         style: Theme.of(context).textTheme.titleMedium,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox.square(
                         dimension: 8.0,
@@ -55,13 +56,13 @@ class RestaurantCard extends StatelessWidget {
                         dimension: 8.0,
                       ),
                       CardRating(rating: restaurant.rating),
-                      if (showFavoriteButton)
-                        IconButton(
-                          icon: Icon(Icons.favorite_rounded),
-                          onPressed: () {}, // TODO: Use state manager
-                        ),
                     ],
-                  )
+                  ),
+                  if (showFavoriteButton)
+                    IconButton(
+                      icon: Icon(Icons.favorite_rounded),
+                      onPressed: () {}, // TODO: Use state manager
+                    )
                 ],
               ),
             ),
