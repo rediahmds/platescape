@@ -40,4 +40,6 @@ class SqliteService {
       },
     );
   }
+
+  String get favoriteTable => _favoriteTable;
 }
