@@ -1,3 +1,5 @@
+export 'favorite_button_state.dart';
+export 'favorite_restaurants_result_state.dart';
 export 'navigationbar_state.dart';
 export 'restaurant_details_result_state.dart';
 export 'restaurant_list_result_state.dart';
