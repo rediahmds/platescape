@@ -23,7 +23,10 @@ class RestaurantListSearchable extends StatelessWidget {
           onSubmitted: onSubmitted,
         ),
         Expanded(
-          child: RestaurantListView(restaurantList: restaurantList),
+          child: RestaurantListView(
+            restaurantList: restaurantList,
+            showFavoriteButton: true,
+          ),
         ),
       ],
     );
