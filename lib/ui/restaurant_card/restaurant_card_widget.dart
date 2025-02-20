@@ -59,10 +59,7 @@ class RestaurantCard extends StatelessWidget {
                     ],
                   ),
                   if (showFavoriteButton)
-                    IconButton(
-                      icon: Icon(Icons.favorite_rounded),
-                      onPressed: () {}, // TODO: Use state manager
-                    )
+                    CardFavoriteButton(restaurant: restaurant),
                 ],
               ),
             ),
