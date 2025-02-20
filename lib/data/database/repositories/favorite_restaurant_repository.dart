@@ -52,4 +52,15 @@ class FavoriteRestaurantRepository {
 
     return result;
   }
+
+  Future<bool> isFavorite(String id) async {
+    final db = await _sqliteService.database;
+    final results = await db.query(
+      _sqliteService.favoriteTable,
+      where: "id = ?",
+      whereArgs: [id],
+    );
+
+    return results.isNotEmpty;
+  }
 }
