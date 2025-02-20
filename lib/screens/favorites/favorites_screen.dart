@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/screens/favorites/favorites_screen_body.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -10,9 +11,7 @@ class FavoritesScreen extends StatelessWidget {
         title: const Text("Favorite Restaurants"),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text("Favorite restaurants"),
-      ),
+      body: FavoritesScreenBody(),
     );
   }
 }

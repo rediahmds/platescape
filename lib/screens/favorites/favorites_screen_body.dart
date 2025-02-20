@@ -4,8 +4,25 @@ import 'package:platescape/static/states/states.dart';
 import 'package:provider/provider.dart';
 import 'package:platescape/ui/ui.dart';
 
-class FavoritesScreenBody extends StatelessWidget {
+class FavoritesScreenBody extends StatefulWidget {
   const FavoritesScreenBody({super.key});
+
+  @override
+  State<FavoritesScreenBody> createState() => _FavoritesScreenBodyState();
+}
+
+class _FavoritesScreenBodyState extends State<FavoritesScreenBody> {
+  @override
+  void initState() {
+    final favoriteRestaurantsProvider =
+        context.read<FavoriteRestaurantsProvider>();
+
+    Future.microtask(() {
+      favoriteRestaurantsProvider.loadFavorites();
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
