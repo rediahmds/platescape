@@ -26,7 +26,7 @@ class SqliteService {
         description TEXT,
         pictureId TEXT NOT NULL,
         city TEXT NOT NULL,
-        rating REAL NOT NULL,
+        rating REAL NOT NULL
       )
       """);
   }
