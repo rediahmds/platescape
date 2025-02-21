@@ -41,6 +41,11 @@ class MainScreen extends StatelessWidget {
                 selectedIcon: Icon(Icons.favorite_rounded),
                 label: "Favorites",
               ),
+              const NavigationDestination(
+                icon: Icon(Icons.settings_outlined),
+                selectedIcon: Icon(Icons.settings_rounded),
+                label: "Settings",
+              ),
             ],
           );
         },
