@@ -5,6 +5,7 @@ import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/static.dart';
 import 'package:platescape/styles/styles.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -52,6 +53,13 @@ void main() {
     ],
     child: App(),
   ));
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+    ),
+  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 }
 
 class App extends StatelessWidget {
