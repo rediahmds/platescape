@@ -1,5 +1,3 @@
-
-
 class Restaurant {
   const Restaurant({
     required this.id,
@@ -25,4 +23,15 @@ class Restaurant {
         city: json["city"],
         rating: json["rating"]?.toDouble(),
       );
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      "id": id,
+      "name": name,
+      "description": description,
+      "pictureId": pictureId,
+      "city": city,
+      "rating": rating,
+    };
+  }
 }

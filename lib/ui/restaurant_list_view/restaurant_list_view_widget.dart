@@ -4,12 +4,14 @@ import 'package:platescape/static/static.dart';
 import 'package:platescape/ui/ui.dart';
 
 class RestaurantListView extends StatelessWidget {
-  const RestaurantListView({
+  RestaurantListView({
     super.key,
     required this.restaurantList,
+    this.showFavoriteButton = false,
   });
 
   final List<Restaurant> restaurantList;
+  final bool showFavoriteButton;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class RestaurantListView extends StatelessWidget {
 
         return RestaurantCard(
             restaurant: restaurant,
+            showFavoriteButton: showFavoriteButton,
             onTap: () {
               Navigator.pushNamed(
                 context,

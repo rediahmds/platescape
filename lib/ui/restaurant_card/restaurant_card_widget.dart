@@ -3,11 +3,16 @@ import 'package:platescape/data/data.dart';
 import 'package:platescape/ui/ui.dart';
 
 class RestaurantCard extends StatelessWidget {
-  const RestaurantCard(
-      {super.key, required this.restaurant, required this.onTap});
+  const RestaurantCard({
+    super.key,
+    required this.restaurant,
+    required this.onTap,
+    this.showFavoriteButton = false,
+  });
 
   final Restaurant restaurant;
   final Function() onTap;
+  final bool showFavoriteButton;
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +34,32 @@ class RestaurantCard extends StatelessWidget {
             ),
             const SizedBox.square(dimension: 8.0),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    restaurant.name,
-                    style: Theme.of(context).textTheme.titleMedium,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        restaurant.name,
+                        style: Theme.of(context).textTheme.titleMedium,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox.square(
+                        dimension: 8.0,
+                      ),
+                      CardCity(city: restaurant.city),
+                      const SizedBox.square(
+                        dimension: 8.0,
+                      ),
+                      CardRating(rating: restaurant.rating),
+                    ],
                   ),
-                  const SizedBox.square(
-                    dimension: 8.0,
-                  ),
-                  CardCity(city: restaurant.city),
-                  const SizedBox.square(
-                    dimension: 8.0,
-                  ),
-                  CardRating(rating: restaurant.rating),
+                  if (showFavoriteButton)
+                    CardFavoriteButton(restaurant: restaurant),
                 ],
               ),
             ),
