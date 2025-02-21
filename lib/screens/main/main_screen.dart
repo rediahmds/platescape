@@ -14,7 +14,8 @@ class MainScreen extends StatelessWidget {
         builder: (context, navbarProvider, child) {
           return switch (navbarProvider.currentState) {
             HomeState() => HomeScreen(),
-            _ => FavoritesScreen(),
+            FavoritesState() => FavoritesScreen(),
+            _ => SettingsScreen(),
           };
         },
       ),
