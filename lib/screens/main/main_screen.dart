@@ -31,12 +31,12 @@ class MainScreen extends StatelessWidget {
               navbarProvider.updateState(state);
             },
             destinations: [
-              NavigationDestination(
+              const NavigationDestination(
                 icon: Icon(Icons.home_outlined),
                 selectedIcon: Icon(Icons.home),
                 label: "Home",
               ),
-              NavigationDestination(
+              const NavigationDestination(
                 icon: Icon(Icons.favorite_outline_rounded),
                 selectedIcon: Icon(Icons.favorite_rounded),
                 label: "Favorites",
