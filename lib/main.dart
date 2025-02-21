@@ -47,9 +47,7 @@ void main() {
         ),
       ),
       ChangeNotifierProvider(
-        create: (context) => FavoriteIconProvider(
-          context.read<FavoriteRestaurantRepository>(),
-        ),
+        create: (context) => FavoriteIconProvider(),
       ),
     ],
     child: App(),

@@ -7,8 +7,12 @@ class FavoriteRestaurantsProvider extends ChangeNotifier {
   FavoriteRestaurantsProvider(this._repository);
   final FavoriteRestaurantRepository _repository;
 
+  List<Restaurant> _favoritesList = [];
+  List<Restaurant> get favoritesList => _favoritesList;
+
   FavoriteRestaurantsResultState _resultState =
       FavoriteRestaurantsLoadingState();
+
   FavoriteRestaurantsResultState get resultState => _resultState;
 
   Future<void> loadFavorites() async {
@@ -21,7 +25,8 @@ class FavoriteRestaurantsProvider extends ChangeNotifier {
       if (favorites.isEmpty) {
         _updateState(FavoriteRestaurantsEmptyState());
       } else {
-        _updateState(FavoriteRestaurantsLoadedState(favorites));
+        _favoritesList = favorites;
+        _updateState(FavoriteRestaurantsLoadedState(_favoritesList));
       }
     } on DatabaseException catch (dbException) {
       final message = "Failed to load favorites list.";
@@ -35,29 +40,15 @@ class FavoriteRestaurantsProvider extends ChangeNotifier {
     }
   }
 
-  // Future<void> toggleFavorite(Restaurant restaurant) async {
-  //   debugPrint("DEBUG: Toggling fav");
-  //   try {
-  //     final isFavorite = await _repository.isFavorite(restaurant.id);
+  Future<void> addFavorite(Restaurant restaurant) async {
+    await _repository.addFavorite(restaurant);
+    loadFavorites();
+  }
 
-  //     if (!isFavorite) {
-  //       await _repository.addFavorite(restaurant);
-  //       debugPrint("DEBUG: Adding fav");
-  //     } else {
-  //       await _repository.removeFavorite(restaurant.id);
-  //       debugPrint("DEBUG: Removing fav");
-  //     }
-  //     await loadFavorites();
-  //   } on DatabaseException catch (dbException) {
-  //     final message = "Failed to toggle favorite status.";
-  //     _updateState(FavoriteRestaurantsErrorState(message));
-  //     debugPrint(dbException.getResultCode().toString()); // TODO: Remove
-  //   } catch (e) {
-  //     final message =
-  //         "An unexpected error occurred while toggling favorite status.";
-  //     _updateState(FavoriteRestaurantsErrorState(message));
-  //   }
-  // }
+  Future<void> removeFavorite(String id) async {
+    await _repository.removeFavorite(id);
+    loadFavorites();
+  }
 
   Future<bool> isFavorite(String id) async {
     final isFav = await _repository.isFavorite(id);
