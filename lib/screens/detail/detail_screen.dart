@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:platescape/data/data.dart';
 import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/static.dart';
+import 'package:platescape/ui/ui.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -45,6 +47,12 @@ class _DetailScreenState extends State<DetailScreen> {
             ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: _buildFavoriteButton(context),
+          ),
+        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -72,5 +80,26 @@ class _DetailScreenState extends State<DetailScreen> {
         },
       ),
     );
+  }
+
+  Widget _buildFavoriteButton(BuildContext context) {
+    return Consumer<RestaurantDetailsProvider>(
+        builder: (context, detailsProvider, child) {
+      switch (detailsProvider.resultState) {
+        case RestaurantDetailsLoadedState(data: final restaurantDetail):
+          final restaurant = Restaurant(
+            id: restaurantDetail.id,
+            name: restaurantDetail.name,
+            description: restaurantDetail.description,
+            pictureId: restaurantDetail.pictureId,
+            city: restaurantDetail.city,
+            rating: restaurantDetail.rating,
+          );
+          return CardFavoriteButton(restaurant: restaurant);
+
+        default:
+          return const SizedBox();
+      }
+    });
   }
 }

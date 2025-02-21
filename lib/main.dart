@@ -12,6 +12,9 @@ void main() {
       Provider(
         create: (context) => APIServices(),
       ),
+      Provider(
+        create: (context) => FavoriteRestaurantRepository(),
+      ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
           context.read<APIServices>(),
@@ -35,6 +38,17 @@ void main() {
           context.read<APIServices>(),
         ),
       ),
+      ChangeNotifierProvider(
+        create: (context) => NavigationBarProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => FavoriteRestaurantsProvider(
+          context.read<FavoriteRestaurantRepository>(),
+        ),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => FavoriteIconProvider(),
+      ),
     ],
     child: App(),
   ));
@@ -48,7 +62,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       initialRoute: AppRoute.home.route,
       routes: {
-        AppRoute.home.route: (context) => HomeScreen(),
+        AppRoute.home.route: (context) => MainScreen(),
         AppRoute.detail.route: (context) => DetailScreen(
               id: ModalRoute.of(context)?.settings.arguments as String,
             ),
