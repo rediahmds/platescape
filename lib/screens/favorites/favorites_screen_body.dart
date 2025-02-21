@@ -31,7 +31,14 @@ class _FavoritesScreenBodyState extends State<FavoritesScreenBody> {
         switch (favoriteProvider.resultState) {
           case FavoriteRestaurantsEmptyState():
             return const Center(
-              child: Text("No favorite restaurants yet."),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 8.0,
+                children: [
+                  Text("No favorite restaurants yet."),
+                  Text("Tap the ❤️ button to add one.")
+                ],
+              ),
             );
           case FavoriteRestaurantsLoadingState():
             return const Center(
