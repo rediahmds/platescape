@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/screens/favorites/favorites_screen_body.dart';
+import 'package:platescape/screens/screens.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
