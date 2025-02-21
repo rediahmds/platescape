@@ -16,7 +16,6 @@ class FavoriteRestaurantsProvider extends ChangeNotifier {
   FavoriteRestaurantsResultState get resultState => _resultState;
 
   Future<void> loadFavorites() async {
-    debugPrint("DEBUG: Loading fav");
     _updateState(FavoriteRestaurantsLoadingState());
 
     try {
@@ -29,10 +28,10 @@ class FavoriteRestaurantsProvider extends ChangeNotifier {
         _updateState(FavoriteRestaurantsLoadedState(_favoritesList));
       }
     } on DatabaseException catch (dbException) {
-      final message = "Failed to load favorites list.";
+      final message =
+          "Failed to load favorites list. ${dbException.getResultCode()}";
+
       _updateState(FavoriteRestaurantsErrorState(message));
-      debugPrint(
-          dbException.getResultCode().toString()); // TODO: REMOVE ON PRODUCTION
     } catch (e) {
       final message =
           "An unexpected error occurred while loading favorites list.";
@@ -41,13 +40,37 @@ class FavoriteRestaurantsProvider extends ChangeNotifier {
   }
 
   Future<void> addFavorite(Restaurant restaurant) async {
-    await _repository.addFavorite(restaurant);
-    loadFavorites();
+    try {
+      await _repository.addFavorite(restaurant);
+      loadFavorites();
+    } on DatabaseException catch (dbException) {
+      final message =
+          "Failed adding to favorites list. ${dbException.getResultCode()}";
+
+      _updateState(FavoriteRestaurantsErrorState(message));
+    } catch (e) {
+      final message =
+          "An unexpected error occurred while adding to favorites list.";
+
+      _updateState(FavoriteRestaurantsErrorState(message));
+    }
   }
 
   Future<void> removeFavorite(String id) async {
-    await _repository.removeFavorite(id);
-    loadFavorites();
+    try {
+      await _repository.removeFavorite(id);
+      loadFavorites();
+    } on DatabaseException catch (dbException) {
+      final message =
+          "Failed while removing from favorites list. ${dbException.getResultCode()}";
+
+      _updateState(FavoriteRestaurantsErrorState(message));
+    } catch (e) {
+      final message =
+          "An unexpected error occurred while removing from favorites list.";
+
+      _updateState(FavoriteRestaurantsErrorState(message));
+    }
   }
 
   Future<bool> isFavorite(String id) async {
