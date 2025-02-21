@@ -5,7 +5,6 @@ class FavoriteIconProvider extends ChangeNotifier {
   final Map<String, FavoriteButtonState> _favoritesState = {};
 
   FavoriteButtonState getState(String id) {
-    debugPrint(_favoritesState.toString());
     return _favoritesState[id] ?? FavoriteInitialState();
   }
 

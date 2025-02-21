@@ -35,26 +35,29 @@ class _CardFavoriteButtonState extends State<CardFavoriteButton> {
     final favoriteIconProvider = context.watch<FavoriteIconProvider>();
     final favoriteRestaurantsProvider =
         context.read<FavoriteRestaurantsProvider>();
+    final restaurant = widget.restaurant;
 
     return IconButton(
       onPressed: () async {
         final isFavorite =
-            await favoriteRestaurantsProvider.isFavorite(widget.restaurant.id);
+            await favoriteRestaurantsProvider.isFavorite(restaurant.id);
 
         if (!isFavorite) {
-          await favoriteRestaurantsProvider.addFavorite(widget.restaurant);
+          await favoriteRestaurantsProvider.addFavorite(restaurant);
         } else {
-          await favoriteRestaurantsProvider
-              .removeFavorite(widget.restaurant.id);
+          await favoriteRestaurantsProvider.removeFavorite(restaurant.id);
         }
 
-        favoriteIconProvider.updateState(widget.restaurant.id, !isFavorite);
+        favoriteIconProvider.updateState(restaurant.id, !isFavorite);
       },
       icon: Icon(
-        favoriteIconProvider.getState(widget.restaurant.id)
-                is FavoriteAddedState
+        favoriteIconProvider.getState(restaurant.id) is FavoriteAddedState
             ? Icons.favorite_rounded
             : Icons.favorite_outline_rounded,
+        color:
+            favoriteIconProvider.getState(restaurant.id) is FavoriteAddedState
+                ? Colors.pink
+                : null,
       ),
     );
   }
