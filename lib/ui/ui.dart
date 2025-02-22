@@ -8,3 +8,4 @@ export 'restaurant_review_forms/restaurant_review_forms.dart';
 export 'restaurant_reviews_list_view/restaurant_reviews_list_view.dart';
 export 'restaurant_search_bar/restaurant_search_bar.dart';
 export 'restaurant_tile/restaurant_tile.dart';
+export 'theme_settings/theme_settings.dart';

@@ -49,8 +49,14 @@ class _DetailScreenState extends State<DetailScreen> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: _buildFavoriteButton(context),
+            padding: const EdgeInsets.all(8.0),
+            child: Ink(
+              decoration: ShapeDecoration(
+                color: Theme.of(context).colorScheme.onSecondary,
+                shape: CircleBorder(),
+              ),
+              child: _buildFavoriteButton(context),
+            ),
           ),
         ],
         backgroundColor: Colors.transparent,
