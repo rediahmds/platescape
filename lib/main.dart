@@ -11,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   final prefs = await SharedPreferences.getInstance();
 
-void main() {
   runApp(MultiProvider(
     providers: [
       Provider(
@@ -81,25 +80,25 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) => MaterialApp(
-      initialRoute: AppRoute.home.route,
-      routes: {
-        AppRoute.home.route: (context) => MainScreen(),
-        AppRoute.detail.route: (context) => DetailScreen(
-              id: ModalRoute.of(context)?.settings.arguments as String,
-            ),
-        AppRoute.reviews.route: (context) {
-          final args = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>;
+        initialRoute: AppRoute.home.route,
+        routes: {
+          AppRoute.home.route: (context) => MainScreen(),
+          AppRoute.detail.route: (context) => DetailScreen(
+                id: ModalRoute.of(context)?.settings.arguments as String,
+              ),
+          AppRoute.reviews.route: (context) {
+            final args = ModalRoute.of(context)?.settings.arguments
+                as Map<String, dynamic>;
 
-          return ReviewsScreen(
-            restaurantName: args["restaurantName"],
-            restaurantId: args["restaurantId"],
-          );
+            return ReviewsScreen(
+              restaurantName: args["restaurantName"],
+              restaurantId: args["restaurantId"],
+            );
+          },
         },
-      },
-      title: 'Platescape',
-      theme: PlatescapeTheme.lightTheme,
-      darkTheme: PlatescapeTheme.darkTheme,
+        title: 'Platescape',
+        theme: PlatescapeTheme.lightTheme,
+        darkTheme: PlatescapeTheme.darkTheme,
         themeMode: themeProvider.currentThemeMode,
       ),
     );
