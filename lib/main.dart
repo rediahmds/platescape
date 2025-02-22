@@ -20,6 +20,9 @@ void main() {
       Provider(
         create: (context) => FavoriteRestaurantRepository(),
       ),
+      Provider(
+        create: (context) => PreferencesService(prefs),
+      ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
           context.read<APIServices>(),
@@ -53,6 +56,11 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (context) => FavoriteIconProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ThemeProvider(
+          context.read<PreferencesService>(),
+        ),
       ),
     ],
     child: App(),
