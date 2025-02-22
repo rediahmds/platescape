@@ -1,8 +1,8 @@
 import 'package:platescape/static/static.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesService {
-  const SharedPreferencesService(this._preferences);
+class PreferencesService {
+  const PreferencesService(this._preferences);
   final SharedPreferences _preferences;
 
   static const String _themeModeKey = "themeMode";
