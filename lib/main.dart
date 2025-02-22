@@ -79,7 +79,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) => MaterialApp(
       initialRoute: AppRoute.home.route,
       routes: {
         AppRoute.home.route: (context) => MainScreen(),
@@ -99,7 +100,8 @@ class App extends StatelessWidget {
       title: 'Platescape',
       theme: PlatescapeTheme.lightTheme,
       darkTheme: PlatescapeTheme.darkTheme,
-      themeMode: ThemeMode.system,
+        themeMode: themeProvider.currentThemeMode,
+      ),
     );
   }
 }
