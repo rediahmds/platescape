@@ -6,6 +6,10 @@ import 'package:platescape/static/static.dart';
 import 'package:platescape/styles/styles.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+void main() async {
+  final prefs = await SharedPreferences.getInstance();
 
 void main() {
   runApp(MultiProvider(
