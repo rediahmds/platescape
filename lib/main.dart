@@ -5,8 +5,13 @@ import 'package:platescape/screens/screens.dart';
 import 'package:platescape/static/static.dart';
 import 'package:platescape/styles/styles.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+
   runApp(MultiProvider(
     providers: [
       Provider(
@@ -14,6 +19,9 @@ void main() {
       ),
       Provider(
         create: (context) => FavoriteRestaurantRepository(),
+      ),
+      Provider(
+        create: (context) => PreferencesService(prefs),
       ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
@@ -49,9 +57,21 @@ void main() {
       ChangeNotifierProvider(
         create: (context) => FavoriteIconProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (context) => ThemeProvider(
+          context.read<PreferencesService>(),
+        ),
+      ),
     ],
     child: App(),
   ));
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+    ),
+  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 }
 
 class App extends StatelessWidget {
@@ -59,27 +79,29 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: AppRoute.home.route,
-      routes: {
-        AppRoute.home.route: (context) => MainScreen(),
-        AppRoute.detail.route: (context) => DetailScreen(
-              id: ModalRoute.of(context)?.settings.arguments as String,
-            ),
-        AppRoute.reviews.route: (context) {
-          final args = ModalRoute.of(context)?.settings.arguments
-              as Map<String, dynamic>;
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) => MaterialApp(
+        initialRoute: AppRoute.home.route,
+        routes: {
+          AppRoute.home.route: (context) => MainScreen(),
+          AppRoute.detail.route: (context) => DetailScreen(
+                id: ModalRoute.of(context)?.settings.arguments as String,
+              ),
+          AppRoute.reviews.route: (context) {
+            final args = ModalRoute.of(context)?.settings.arguments
+                as Map<String, dynamic>;
 
-          return ReviewsScreen(
-            restaurantName: args["restaurantName"],
-            restaurantId: args["restaurantId"],
-          );
+            return ReviewsScreen(
+              restaurantName: args["restaurantName"],
+              restaurantId: args["restaurantId"],
+            );
+          },
         },
-      },
-      title: 'Platescape',
-      theme: PlatescapeTheme.lightTheme,
-      darkTheme: PlatescapeTheme.darkTheme,
-      themeMode: ThemeMode.system,
+        title: 'Platescape',
+        theme: PlatescapeTheme.lightTheme,
+        darkTheme: PlatescapeTheme.darkTheme,
+        themeMode: themeProvider.currentThemeMode,
+      ),
     );
   }
 }

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:platescape/screens/screens.dart';
 
-class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({super.key});
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Favorite Restaurants"),
+        title: const Text("Settings"),
         centerTitle: true,
       ),
-      body: FavoritesScreenBody(),
+      body: SettingsScreenBody(),
     );
   }
 }
