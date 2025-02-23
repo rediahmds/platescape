@@ -23,6 +23,11 @@ void main() async {
       Provider(
         create: (context) => PreferencesService(prefs),
       ),
+      Provider(
+        create: (context) => NotificationService()
+          ..init()
+          ..configureLocalTimeZone(),
+      ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
           context.read<APIServices>(),
