@@ -10,7 +10,7 @@ class NotificationProvider extends ChangeNotifier {
   bool _permission = false;
   bool get permission => _permission;
 
-  Future<void> showDailyNotification() async {
+  Future<void> scheduleDailyNotification() async {
     _notificationId++;
     await _notificationService.scheduleDailyNotification(
       id: _notificationId,
