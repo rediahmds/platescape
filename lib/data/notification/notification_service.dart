@@ -133,4 +133,13 @@ class NotificationService {
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
+
+  Future<List<PendingNotificationRequest>> getPendingNotifications() async {
+    final pendingNotifications = await _plugin.pendingNotificationRequests();
+    return pendingNotifications;
+  }
+
+  Future<void> cancelNotification(int id) async {
+    await _plugin.cancel(id);
+  }
 }
