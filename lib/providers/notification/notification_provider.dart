@@ -32,4 +32,8 @@ class NotificationProvider extends ChangeNotifier {
   Future<void> cancelNotification(int id) async {
     await _notificationService.cancelNotification(id);
   }
+
+  Future<void> cancelAllNotifications() async {
+    await _notificationService.cancelAllNotifications();
+  }
 }
