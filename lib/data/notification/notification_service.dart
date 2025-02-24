@@ -64,7 +64,7 @@ class NotificationService {
     return isNotificationGranted && isAlarmGranted;
   }
 
-  Future<bool> requestPlatformPermission() async {
+  Future<bool> requestPlatformPermissions() async {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         final isAndroidFullyPermitted = await _requestAndroidPermissions();

@@ -71,7 +71,7 @@ void main() async {
         create: (context) => NotificationProvider(
           context.read<NotificationService>(),
           context.read<PreferencesService>(),
-        ),
+        )..requestPlatformPermissions(),
       ),
     ],
     child: App(),

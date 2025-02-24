@@ -32,6 +32,11 @@ class NotificationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> requestPlatformPermissions() async {
+    _permission = await _notificationService.requestPlatformPermissions();
+    notifyListeners();
+  }
+
   Future<void> toggleNotification(bool value) async {
     _isNotificationEnabled = value;
     await _preferencesService.saveNotification(value);
