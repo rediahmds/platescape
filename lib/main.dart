@@ -67,6 +67,12 @@ void main() async {
           context.read<PreferencesService>(),
         ),
       ),
+      ChangeNotifierProvider(
+        create: (context) => NotificationProvider(
+          context.read<NotificationService>(),
+          context.read<PreferencesService>(),
+        ),
+      ),
     ],
     child: App(),
   ));
