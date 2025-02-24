@@ -134,6 +134,42 @@ class NotificationService {
     );
   }
 
+  Future<void> scheduleTestNotification({
+    required int id,
+    required Duration duration,
+    String channelId = "test_notification",
+    String channelName = "Test Notification",
+    String channelDescription = "Test notification invoked by user",
+  }) async {
+    final androidChannel = AndroidNotificationDetails(
+      channelId,
+      channelName,
+      channelDescription: channelDescription,
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: "ticker",
+    );
+
+    final notificationTitle = "Reminder Test!";
+    final notificationBody =
+        "This is how the actual reminder will look like! 🍛";
+    final now = tz.TZDateTime.now(tz.local);
+    final testSchedule = now.add(duration);
+    final notificationDetails = NotificationDetails(android: androidChannel);
+
+    await _plugin.zonedSchedule(
+      id,
+      notificationTitle,
+      notificationBody,
+      testSchedule,
+      notificationDetails,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.wallClockTime,
+      androidScheduleMode: AndroidScheduleMode.exact,
+      matchDateTimeComponents: DateTimeComponents.dateAndTime,
+    );
+  }
+
   Future<List<PendingNotificationRequest>> getPendingNotifications() async {
     final pendingNotifications = await _plugin.pendingNotificationRequests();
     return pendingNotifications;
