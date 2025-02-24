@@ -52,6 +52,14 @@ class NotificationProvider extends ChangeNotifier {
     );
   }
 
+  Future<void> showTestNotification(Duration duration) async {
+    _notificationId++;
+    await _notificationService.scheduleTestNotification(
+      id: _notificationId,
+      duration: duration,
+    );
+  }
+
   Future<void> getPendingNotifications() async {
     _pendingNotifications =
         await _notificationService.getPendingNotifications();
