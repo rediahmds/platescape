@@ -1,3 +1,4 @@
+export 'notification_settings/notification_settings.dart';
 export 'restaurant_card/restaurant_card.dart';
 export 'restaurant_list_searchable/restaurant_list_searchable.dart';
 export 'restaurant_list_view/restaurant_list_view.dart';

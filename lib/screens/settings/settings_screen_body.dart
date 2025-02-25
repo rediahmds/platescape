@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/ui/theme_settings/theme_settings.dart';
+import 'package:platescape/ui/ui.dart';
 
 class SettingsScreenBody extends StatelessWidget {
   const SettingsScreenBody({super.key});
@@ -10,6 +10,8 @@ class SettingsScreenBody extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ThemeTile(),
+        NotificationTile(),
+        PreviewNotificationTile(),
       ],
     );
   }
