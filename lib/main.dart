@@ -28,6 +28,9 @@ void main() async {
           ..init()
           ..configureLocalTimeZone(),
       ),
+      Provider(
+        create: (context) => WorkmanagerService()..init(),
+      ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
           context.read<APIServices>(),
