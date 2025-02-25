@@ -170,6 +170,10 @@ class NotificationService {
     );
   }
 
+  Future<List<PendingNotificationRequest>> getPendingNotifications() async {
+    return await _plugin.pendingNotificationRequests();
+  }
+
   Future<void> cancelAllNotifications() async {
     await _plugin.cancelAll();
   }
