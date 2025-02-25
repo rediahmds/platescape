@@ -150,7 +150,7 @@ class NotificationService {
       ticker: "ticker",
     );
 
-    final notificationTitle = "Reminder Test!";
+    final notificationTitle = "Reminder Preview!";
     final notificationBody =
         "This is how the actual reminder will look like! 🍛";
     final now = tz.TZDateTime.now(tz.local);
@@ -164,7 +164,7 @@ class NotificationService {
       testSchedule,
       notificationDetails,
       uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.wallClockTime,
+          UILocalNotificationDateInterpretation.absoluteTime,
       androidScheduleMode: AndroidScheduleMode.exact,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
     );
