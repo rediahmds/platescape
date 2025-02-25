@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/ui/notification_settings/test_notification_tile.dart';
 import 'package:platescape/ui/ui.dart';
 
 class SettingsScreenBody extends StatelessWidget {
@@ -12,7 +11,7 @@ class SettingsScreenBody extends StatelessWidget {
       children: [
         ThemeTile(),
         NotificationTile(),
-        TestNotificationTile(),
+        PreviewNotificationTile(),
       ],
     );
   }
