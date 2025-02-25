@@ -6,6 +6,7 @@ class PreferencesService {
   final SharedPreferences _preferences;
 
   static const String _themeModeKey = "themeMode";
+  static const String _notificationEnabledKey = "notificationEnabled";
 
   Future<void> saveTheme(PlatescapeThemeMode mode) async {
     try {
@@ -23,5 +24,17 @@ class PreferencesService {
       (mode) => mode.name == storedMode,
       orElse: () => defaultMode,
     );
+  }
+
+  Future<void> saveNotification(bool isEnabled) async {
+    try {
+      await _preferences.setBool(_notificationEnabledKey, isEnabled);
+    } catch (e) {
+      throw Exception("Failed to save notification settings.");
+    }
+  }
+
+  bool getNotification() {
+    return _preferences.getBool(_notificationEnabledKey) ?? false;
   }
 }

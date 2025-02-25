@@ -23,6 +23,11 @@ void main() async {
       Provider(
         create: (context) => PreferencesService(prefs),
       ),
+      Provider(
+        create: (context) => NotificationService()
+          ..init()
+          ..configureLocalTimeZone(),
+      ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
           context.read<APIServices>(),
@@ -61,6 +66,12 @@ void main() async {
         create: (context) => ThemeProvider(
           context.read<PreferencesService>(),
         ),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => NotificationProvider(
+          context.read<NotificationService>(),
+          context.read<PreferencesService>(),
+        )..requestPlatformPermissions(),
       ),
     ],
     child: App(),

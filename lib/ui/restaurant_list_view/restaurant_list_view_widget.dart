@@ -4,7 +4,7 @@ import 'package:platescape/static/static.dart';
 import 'package:platescape/ui/ui.dart';
 
 class RestaurantListView extends StatelessWidget {
-  RestaurantListView({
+  const RestaurantListView({
     super.key,
     required this.restaurantList,
     this.showFavoriteButton = false,
