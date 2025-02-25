@@ -13,7 +13,8 @@ class NotificationTile extends StatelessWidget {
   final String subtitle;
 
   static const String _tileTitle = "Lunch Reminder";
-  static const String _tileSubtitle = "Get notified when it's time for lunch";
+  static const String _tileSubtitle =
+      "Get a reminder when it's time for lunch at 11 AM";
 
   @override
   Widget build(BuildContext context) {
