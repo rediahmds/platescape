@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:platescape/data/data.dart';
 
 class NotificationProvider extends ChangeNotifier {
@@ -22,10 +21,6 @@ class NotificationProvider extends ChangeNotifier {
 
   String _message = "";
   String get message => _message;
-
-  List<PendingNotificationRequest> _pendingNotifications = [];
-  List<PendingNotificationRequest> get pendingNotifications =>
-      _pendingNotifications;
 
   void _loadNotificationStatus() {
     _isNotificationEnabled = _preferencesService.getNotification();
@@ -63,17 +58,6 @@ class NotificationProvider extends ChangeNotifier {
       id: _notificationId,
       duration: duration,
     );
-  }
-
-  Future<void> getPendingNotifications() async {
-    _pendingNotifications =
-        await _notificationService.getPendingNotifications();
-
-    notifyListeners();
-  }
-
-  Future<void> cancelNotification(int id) async {
-    await _notificationService.cancelNotification(id);
   }
 
   Future<void> cancelAllNotifications() async {
