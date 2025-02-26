@@ -29,7 +29,7 @@ void main() {
       final mockRestaurantsResponse = RestaurantListResponse(
         error: false,
         message: "success",
-        count: 1,
+        count: 2,
         restaurants: [
           Restaurant(
             id: "1",
@@ -38,6 +38,14 @@ void main() {
             pictureId: "pic1",
             city: "Silicon Valley",
             rating: 4.9,
+          ),
+          Restaurant(
+            id: "2",
+            name: "C Resto",
+            description: "Yummy C foods and drinks",
+            pictureId: "pic2",
+            city: "New York",
+            rating: 4.4,
           ),
         ],
       );
