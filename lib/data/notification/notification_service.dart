@@ -4,14 +4,14 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+final plugin = FlutterLocalNotificationsPlugin();
+
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
   factory NotificationService() {
     return _instance;
   }
   NotificationService._internal();
-
-  final _plugin = FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
     final androidSettings =
@@ -21,11 +21,11 @@ class NotificationService {
       android: androidSettings,
     );
 
-    await _plugin.initialize(initilizationSettings);
+    await plugin.initialize(initilizationSettings);
   }
 
   Future<bool> _isAndroidPermissionGranted() async {
-    final isGranted = await _plugin
+    final isGranted = await plugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.areNotificationsEnabled();
@@ -34,7 +34,7 @@ class NotificationService {
   }
 
   Future<bool> _requestAndroidNotificationPermission() async {
-    final isPermitted = await _plugin
+    final isPermitted = await plugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
@@ -43,7 +43,7 @@ class NotificationService {
   }
 
   Future<bool> _requestAndroidExactAlarmsPermission() async {
-    final isPermitted = await _plugin
+    final isPermitted = await plugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestExactAlarmsPermission();
@@ -121,7 +121,7 @@ class NotificationService {
     final selectedSchedule = defaultScheduleDateTime();
     final notificationDetails = NotificationDetails(android: androidChannel);
 
-    await _plugin.zonedSchedule(
+    await plugin.zonedSchedule(
       id,
       notificationTitle,
       notificationBody,
@@ -157,7 +157,7 @@ class NotificationService {
     final testSchedule = now.add(duration);
     final notificationDetails = NotificationDetails(android: androidChannel);
 
-    await _plugin.zonedSchedule(
+    await plugin.zonedSchedule(
       id,
       notificationTitle,
       notificationBody,
@@ -171,10 +171,10 @@ class NotificationService {
   }
 
   Future<List<PendingNotificationRequest>> getPendingNotifications() async {
-    return await _plugin.pendingNotificationRequests();
+    return await plugin.pendingNotificationRequests();
   }
 
   Future<void> cancelAllNotifications() async {
-    await _plugin.cancelAll();
+    await plugin.cancelAll();
   }
 }
