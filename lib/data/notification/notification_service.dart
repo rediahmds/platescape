@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:platescape/data/data.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -7,11 +8,11 @@ import 'package:timezone/timezone.dart' as tz;
 final plugin = FlutterLocalNotificationsPlugin();
 
 class NotificationService {
-  static final NotificationService _instance = NotificationService._internal();
-  factory NotificationService() {
-    return _instance;
-  }
-  NotificationService._internal();
+  // static final NotificationService _instance = NotificationService._internal();
+  // factory NotificationService() {
+  //   return _instance;
+  // }
+  // NotificationService._internal();
 
   Future<void> init() async {
     final androidSettings =
@@ -101,8 +102,8 @@ class NotificationService {
     return defaultSchedule;
   }
 
-  Future<void> scheduleDailyNotification({
-    required int id,
+  Future<void> showNotification({
+    required Restaurant restaurant,
     String channelId = "daily_notification",
     String channelName = "Daily Notification",
     String channelDescription = "Daily lunch reminder at specified time",
@@ -116,21 +117,19 @@ class NotificationService {
       ticker: "ticker",
     );
 
-    final notificationTitle = "Lunch Time!";
-    final notificationBody = "It's time to have your lunch! 🍛";
-    final selectedSchedule = defaultScheduleDateTime();
-    final notificationDetails = NotificationDetails(android: androidChannel);
+    final notificationDetails = NotificationDetails(
+      android: androidChannel,
+    );
 
-    await plugin.zonedSchedule(
-      id,
+    final notificationTitle = "Lunch Time!";
+    final notificationBody = "Check out menus from ${restaurant.name}! 🍛";
+
+    await plugin.show(
+      1,
       notificationTitle,
       notificationBody,
-      selectedSchedule,
       notificationDetails,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
+      payload: restaurant.id,
     );
   }
 
