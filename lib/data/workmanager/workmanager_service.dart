@@ -1,9 +1,19 @@
+import 'package:platescape/data/data.dart';
 import 'package:platescape/static/static.dart';
 import 'package:workmanager/workmanager.dart';
 
 @pragma("vm:entry-point")
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
+    final APIServices apiServices = APIServices();
+    final randomRestaurant = await apiServices.getRandomRestaurant();
+
+    print("DEBUG: Executing $task with $inputData in callbackDispatcher");
+
+    await NotificationService().showNotification(
+      restaurant: randomRestaurant,
+    );
+
     return Future.value(true);
   });
 }
@@ -45,19 +55,24 @@ class WorkmanagerService {
   Future<void> runPeriodicTask() async {
     final uniqueName = PlatescapeWorkmanager.periodic.uniqueName;
     final taskName = PlatescapeWorkmanager.periodic.taskName;
-    
+
     final now = DateTime.now();
-    final delayMinute = 60 - now.minute;
-    final delaySeconds = 60 - now.second;
+    final defaultHour = 16;
+    final defaultMinute = 44;
+    final defaultSchedule = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      defaultHour,
+      defaultMinute,
+    );
+    final initialDelay = defaultSchedule.difference(now);
 
     await _workmanager.registerPeriodicTask(
       uniqueName,
       taskName,
-      frequency: const Duration(hours: 1),
-      initialDelay: Duration(
-        minutes: delayMinute,
-        seconds: delaySeconds,
-      ),
+      frequency: const Duration(hours: 24),
+      initialDelay: initialDelay,
       inputData: {
         "data": "Payload from $uniqueName",
       },

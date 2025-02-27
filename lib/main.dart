@@ -31,6 +31,9 @@ void main() async {
       Provider(
         create: (context) => WorkmanagerService()..init(),
       ),
+      Provider(
+        create: (context) => WorkmanagerService()..init(),
+      ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
           context.read<APIServices>(),
@@ -74,6 +77,7 @@ void main() async {
         create: (context) => NotificationProvider(
           context.read<NotificationService>(),
           context.read<PreferencesService>(),
+          context.read<WorkmanagerService>(),
         )..requestPlatformPermissions(),
       ),
     ],
