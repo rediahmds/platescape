@@ -18,15 +18,13 @@ class APIServices {
     return RestaurantDetailsResponse.fromJson(response.data);
   }
 
-  Future<RestaurantDetails> getRandomRestaurantDetails() async {
-    final restaurants = await getRestaurantList();
-    
-    final randomIndex = Random().nextInt(restaurants.restaurants.length);
-    final randomRestaurantId = restaurants.restaurants[randomIndex].id;
-    final randomRestaurantDetails =
-        await getRestaurantDetails(randomRestaurantId);
+  Future<Restaurant> getRandomRestaurant() async {
+    final response = await getRestaurantList();
 
-    return randomRestaurantDetails.restaurant;
+    final randomIndex = Random().nextInt(response.restaurants.length);
+    final randomRestaurant = response.restaurants[randomIndex];
+
+    return randomRestaurant;
   }
 
   Future<List<CustomerReview>> getRestaurantReviews(String id) async {
