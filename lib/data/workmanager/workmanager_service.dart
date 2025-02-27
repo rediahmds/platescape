@@ -57,8 +57,8 @@ class WorkmanagerService {
     final taskName = PlatescapeWorkmanager.periodic.taskName;
 
     final now = DateTime.now();
-    final defaultHour = 16;
-    final defaultMinute = 44;
+    final defaultHour = 11;
+    final defaultMinute = 0;
     final defaultSchedule = DateTime(
       now.year,
       now.month,
