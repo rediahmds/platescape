@@ -34,6 +34,9 @@ class NotificationProvider extends ChangeNotifier {
 
   void _loadNotificationStatus() {
     _isNotificationEnabled = _preferencesService.getNotification();
+    if (_isNotificationEnabled) {
+      _scheduleDailyNotification();
+    }
     notifyListeners();
   }
 
