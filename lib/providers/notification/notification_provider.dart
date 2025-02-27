@@ -3,7 +3,11 @@ import 'package:platescape/data/data.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationProvider extends ChangeNotifier {
-  NotificationProvider(this._notificationService, this._preferencesService) {
+  NotificationProvider(
+    this._notificationService,
+    this._preferencesService,
+    this._workmanagerService,
+  ) {
     _loadNotificationStatus();
   }
 
@@ -11,6 +15,7 @@ class NotificationProvider extends ChangeNotifier {
 
   final NotificationService _notificationService;
   final PreferencesService _preferencesService;
+  final WorkmanagerService _workmanagerService;
 
   int _notificationId = 0;
 
@@ -55,10 +60,7 @@ class NotificationProvider extends ChangeNotifier {
   }
 
   Future<void> _scheduleDailyNotification() async {
-    _notificationId++;
-    await _notificationService.scheduleDailyNotification(
-      id: _notificationId,
-    );
+    await _workmanagerService.runPeriodicTask();
   }
 
   Future<void> showTestNotification(Duration duration) async {
@@ -71,5 +73,6 @@ class NotificationProvider extends ChangeNotifier {
 
   Future<void> cancelAllNotifications() async {
     await _notificationService.cancelAllNotifications();
+    await _workmanagerService.cancelAllTasks();
   }
 }
