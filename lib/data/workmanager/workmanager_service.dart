@@ -52,13 +52,18 @@ class WorkmanagerService {
     final now = DateTime.now();
     final defaultHour = 11;
     final defaultMinute = 0;
-    final defaultSchedule = DateTime(
+    DateTime defaultSchedule = DateTime(
       now.year,
       now.month,
       now.day,
       defaultHour,
       defaultMinute,
     );
+
+    final isPast = defaultSchedule.isBefore(now);
+    if (isPast) {
+      defaultSchedule = defaultSchedule.add(const Duration(days: 1));
+    }
     final initialDelay = defaultSchedule.difference(now);
 
     await _workmanager.registerPeriodicTask(
