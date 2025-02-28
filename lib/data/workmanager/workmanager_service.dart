@@ -23,7 +23,7 @@ class WorkmanagerService {
   WorkmanagerService._internal();
 
   static final Workmanager _workmanager = Workmanager();
-  final bool isDebugMode = true;
+  final bool isDebugMode = false;
 
   Future<void> init() async {
     await _workmanager.initialize(
