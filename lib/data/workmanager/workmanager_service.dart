@@ -5,10 +5,7 @@ import 'package:workmanager/workmanager.dart';
 @pragma("vm:entry-point")
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    final APIServices apiServices = APIServices();
-    final randomRestaurant = await apiServices.getRandomRestaurant();
-
-    print("DEBUG: Executing $task with $inputData in callbackDispatcher");
+    final randomRestaurant = await APIServices().getRandomRestaurant();
 
     await NotificationService().showNotification(
       restaurant: randomRestaurant,
