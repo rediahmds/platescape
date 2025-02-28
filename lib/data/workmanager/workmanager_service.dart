@@ -42,10 +42,6 @@ class WorkmanagerService {
       constraints: Constraints(
         networkType: NetworkType.connected,
       ),
-      initialDelay: const Duration(seconds: 5),
-      inputData: {
-        "data": "Payload from $uniqueName",
-      },
     );
   }
 
