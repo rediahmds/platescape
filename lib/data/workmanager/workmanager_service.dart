@@ -73,9 +73,6 @@ class WorkmanagerService {
       taskName,
       frequency: const Duration(hours: 24),
       initialDelay: initialDelay,
-      inputData: {
-        "data": "Payload from $uniqueName",
-      },
     );
   }
 
