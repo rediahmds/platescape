@@ -39,6 +39,7 @@ class WorkmanagerService {
     await _workmanager.registerOneOffTask(
       uniqueName,
       taskName,
+      initialDelay: const Duration(seconds: 3),
       constraints: Constraints(
         networkType: NetworkType.connected,
       ),
