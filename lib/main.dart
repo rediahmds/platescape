@@ -12,13 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
 
-  final notificationService = NotificationService();
-  await notificationService.init();
-  await notificationService.configureLocalTimeZone();
-
-  final workmanagerService = WorkmanagerService();
-  await workmanagerService.init();
-
   runApp(MultiProvider(
     providers: [
       Provider(
@@ -31,10 +24,12 @@ void main() async {
         create: (context) => PreferencesService(prefs),
       ),
       Provider(
-        create: (context) => notificationService,
+        create: (context) => NotificationService()
+          ..init()
+          ..configureLocalTimeZone(),
       ),
       Provider(
-        create: (context) => workmanagerService,
+        create: (context) => WorkmanagerService()..init(),
       ),
       ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
