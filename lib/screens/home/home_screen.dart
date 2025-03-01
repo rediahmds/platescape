@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:platescape/data/models/list/restaurant.dart';
+import 'package:platescape/data/data.dart';
 import 'package:platescape/providers/providers.dart';
 import 'package:platescape/screens/home/home.dart';
 import 'package:platescape/static/static.dart';
