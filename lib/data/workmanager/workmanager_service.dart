@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:platescape/data/data.dart';
 import 'package:platescape/static/static.dart';
 import 'package:workmanager/workmanager.dart';
@@ -6,7 +5,6 @@ import 'package:workmanager/workmanager.dart';
 @pragma("vm:entry-point")
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
-    debugPrint("DEBUG: executing callbackDispatcher");
     final randomRestaurant = await APIServices().getRandomRestaurant();
 
     await NotificationService().showNotification(
