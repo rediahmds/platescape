@@ -32,6 +32,14 @@ void main() async {
         create: (context) => WorkmanagerService()..init(),
       ),
       ChangeNotifierProvider(
+        create: (context) => NotificationProvider(
+          context.read<NotificationService>(),
+          context.read<PreferencesService>(),
+          context.read<WorkmanagerService>(),
+        )..requestPlatformPermissions(),
+        lazy: false,
+      ),
+      ChangeNotifierProvider(
         create: (context) => RestaurantListProvider(
           context.read<APIServices>(),
         ),
@@ -69,12 +77,6 @@ void main() async {
         create: (context) => ThemeProvider(
           context.read<PreferencesService>(),
         ),
-      ),
-      ChangeNotifierProvider(
-        create: (context) => NotificationProvider(
-          context.read<NotificationService>(),
-          context.read<PreferencesService>(),
-        )..requestPlatformPermissions(),
       ),
     ],
     child: App(),
