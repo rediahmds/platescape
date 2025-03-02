@@ -11,8 +11,6 @@ class NotificationProvider extends ChangeNotifier {
     _loadNotificationStatus();
   }
 
-  // TODO: Refactor to implement try catch block
-
   final NotificationService _notificationService;
   final PreferencesService _preferencesService;
   final WorkmanagerService _workmanagerService;
@@ -33,37 +31,49 @@ class NotificationProvider extends ChangeNotifier {
       _pendingNotifications;
 
   void _loadNotificationStatus() {
-    _isNotificationEnabled = _preferencesService.getNotification();
-    if (_isNotificationEnabled) {
-      _scheduleDailyNotification();
+    try {
+      _isNotificationEnabled = _preferencesService.getNotification();
+      if (_isNotificationEnabled) {
+        _scheduleDailyNotification();
+      }
+    } catch (e) {
+      _message = "Failed to load preferences";
     }
     notifyListeners();
   }
 
   Future<void> requestPlatformPermissions() async {
-    _permission = await _notificationService.requestPlatformPermissions();
+    try {
+      _permission = await _notificationService.requestPlatformPermissions();
+    } catch (e) {
+      _message = "Failed to request for permissions";
+    }
     notifyListeners();
   }
 
   Future<void> toggleNotification(bool value) async {
-    _isNotificationEnabled = value;
-    await _preferencesService.saveNotification(value);
+    try {
+      _isNotificationEnabled = value;
+      await _preferencesService.saveNotification(value);
 
-    if (_isNotificationEnabled) {
-      await _scheduleDailyNotification();
-      _pendingNotifications =
-          await _notificationService.getPendingNotifications();
-    } else {
-      await cancelAllNotifications();
-      _pendingNotifications =
-          await _notificationService.getPendingNotifications();
+      if (_isNotificationEnabled) {
+        await _scheduleDailyNotification();
+        _pendingNotifications =
+            await _notificationService.getPendingNotifications();
+      } else {
+        await cancelAllNotifications();
+        _pendingNotifications =
+            await _notificationService.getPendingNotifications();
+      }
+    } catch (e) {
+      _message = "Failed to toggle notification setting";
     }
 
     notifyListeners();
   }
 
   Future<void> _scheduleDailyNotification() async {
-    await _workmanagerService.runPeriodicTask();
+    _workmanagerService.runPeriodicTask();
   }
 
   Future<void> showTestNotification(Duration duration) async {
