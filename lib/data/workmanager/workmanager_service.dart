@@ -53,8 +53,8 @@ class WorkmanagerService {
     final taskName = PlatescapeWorkmanager.periodic.taskName;
 
     final now = DateTime.now();
-    final defaultHour = 17;
-    final defaultMinute = 55;
+    final defaultHour = 11;
+    final defaultMinute = 0;
     DateTime defaultSchedule = DateTime(
       now.year,
       now.month,
@@ -69,19 +69,12 @@ class WorkmanagerService {
     }
     final initialDelay = defaultSchedule.difference(now);
 
-    // runOneOffTask();
-
-    debugPrint("DEBUG: executing periodic task");
-    debugPrint("DEBUG: delay: $initialDelay");
-    debugPrint("DEBUG: schedule: $defaultSchedule");
-
-    //TODO: currenly showing every 15 minutes
 
     await _workmanager.registerPeriodicTask(
       uniqueName,
       taskName,
-      frequency: const Duration(minutes: 15),
-      // initialDelay: initialDelay,
+      frequency: const Duration(days: 1),
+      initialDelay: initialDelay,
     );
   }
 
