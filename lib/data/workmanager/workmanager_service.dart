@@ -69,7 +69,6 @@ class WorkmanagerService {
     }
     final initialDelay = defaultSchedule.difference(now);
 
-
     await _workmanager.registerPeriodicTask(
       uniqueName,
       taskName,
