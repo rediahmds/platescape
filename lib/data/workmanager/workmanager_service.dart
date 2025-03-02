@@ -75,6 +75,7 @@ class WorkmanagerService {
       taskName,
       frequency: const Duration(days: 1),
       initialDelay: initialDelay,
+      constraints: Constraints(networkType: NetworkType.connected),
     );
   }
 
