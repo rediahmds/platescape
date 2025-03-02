@@ -32,14 +32,14 @@ class WorkmanagerService {
     );
   }
 
-  Future<void> runOneOffTask() async {
+  Future<void> runOneOffTask({required Duration initialDelay}) async {
     final uniqueName = PlatescapeWorkmanager.oneOff.uniqueName;
     final taskName = PlatescapeWorkmanager.oneOff.taskName;
 
     await _workmanager.registerOneOffTask(
       uniqueName,
       taskName,
-      initialDelay: const Duration(seconds: 3),
+      initialDelay: initialDelay,
       constraints: Constraints(
         networkType: NetworkType.connected,
       ),
@@ -66,6 +66,8 @@ class WorkmanagerService {
       defaultSchedule = defaultSchedule.add(const Duration(days: 1));
     }
     final initialDelay = defaultSchedule.difference(now);
+
+    runOneOffTask(initialDelay: initialDelay);
 
     await _workmanager.registerPeriodicTask(
       uniqueName,
