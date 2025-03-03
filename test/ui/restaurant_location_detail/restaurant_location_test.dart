@@ -36,7 +36,32 @@ void main() {
       final sizedBoxFinder = find.byWidgetPredicate(
           (widget) => widget is SizedBox && widget.width == 6.0);
       expect(sizedBoxFinder, findsOneWidget);
+    });
 
+    testWidgets('Should update UI when properties change',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(widget);
+
+      expect(find.text(mockCity), findsOneWidget);
+      expect(find.text(mockAddress), findsOneWidget);
+
+      const newCity = "Jakarta";
+      const newAddress = "Bunderan HI";
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: RestaurantLocation(
+              city: newCity,
+              address: newAddress,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text(newCity), findsOneWidget);
+      expect(find.text(newAddress), findsOneWidget);
+      expect(find.text(mockCity), findsNothing);
+      expect(find.text(mockAddress), findsNothing);
     });
   });
 }
