@@ -75,7 +75,20 @@ class _DetailScreenState extends State<DetailScreen> {
 
             case RestaurantDetailsErrorState(error: final message):
               return Center(
-                child: Text(message),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 8.0,
+                  children: [
+                    Text(message),
+                    FilledButton.tonalIcon(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      label: const Text("Back"),
+                      icon: const Icon(Icons.arrow_back_rounded),
+                    )
+                  ],
+                ),
               );
 
             default:

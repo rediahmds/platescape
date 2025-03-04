@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:platescape/data/data.dart';
 
@@ -14,6 +16,15 @@ class APIServices {
   Future<RestaurantDetailsResponse> getRestaurantDetails(String id) async {
     final response = await _dio.get("/detail/$id");
     return RestaurantDetailsResponse.fromJson(response.data);
+  }
+
+  Future<Restaurant> getRandomRestaurant() async {
+    final response = await getRestaurantList();
+
+    final randomIndex = Random().nextInt(response.restaurants.length);
+    final randomRestaurant = response.restaurants[randomIndex];
+
+    return randomRestaurant;
   }
 
   Future<List<CustomerReview>> getRestaurantReviews(String id) async {

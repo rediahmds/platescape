@@ -38,6 +38,7 @@ class _CardFavoriteButtonState extends State<CardFavoriteButton> {
     final restaurant = widget.restaurant;
 
     return IconButton(
+      key: ValueKey(restaurant.name),
       onPressed: () async {
         final isFavorite =
             await favoriteRestaurantsProvider.isFavorite(restaurant.id);
