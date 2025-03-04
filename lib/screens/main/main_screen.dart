@@ -35,16 +35,19 @@ class MainScreen extends StatelessWidget {
                 icon: Icon(Icons.home_outlined),
                 selectedIcon: Icon(Icons.home),
                 label: "Home",
+                key: ValueKey("Home"),
               ),
               const NavigationDestination(
                 icon: Icon(Icons.favorite_outline_rounded),
                 selectedIcon: Icon(Icons.favorite_rounded),
                 label: "Favorites",
+                key: ValueKey("Favorites"),
               ),
               const NavigationDestination(
                 icon: Icon(Icons.settings_outlined),
                 selectedIcon: Icon(Icons.settings_rounded),
                 label: "Settings",
+                key: ValueKey("Settings"),
               ),
             ],
           );

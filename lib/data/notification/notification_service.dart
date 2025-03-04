@@ -115,6 +115,7 @@ class NotificationService {
       importance: Importance.max,
       priority: Priority.high,
       ticker: "ticker",
+      sound: const RawResourceAndroidNotificationSound("slow_spring_board"),
     );
 
     final notificationDetails = NotificationDetails(
@@ -147,6 +148,7 @@ class NotificationService {
       importance: Importance.max,
       priority: Priority.high,
       ticker: "ticker",
+      sound: const RawResourceAndroidNotificationSound("slow_spring_board"),
     );
 
     final notificationTitle = "Reminder Preview!";
