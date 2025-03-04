@@ -83,25 +83,6 @@ class NotificationService {
     tz.setLocalLocation(location);
   }
 
-  tz.TZDateTime defaultScheduleDateTime() {
-    final now = tz.TZDateTime.now(tz.local);
-    final defaultHour = 11;
-    tz.TZDateTime defaultSchedule = tz.TZDateTime(
-      tz.local,
-      now.year,
-      now.month,
-      now.day,
-      defaultHour,
-    );
-
-    final isPast = defaultSchedule.isBefore(now);
-    if (isPast) {
-      defaultSchedule = defaultSchedule.add(const Duration(days: 1));
-    }
-
-    return defaultSchedule;
-  }
-
   Future<void> showNotification({
     required Restaurant restaurant,
     String channelId = "daily_notification",
@@ -169,10 +150,6 @@ class NotificationService {
       androidScheduleMode: AndroidScheduleMode.exact,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
     );
-  }
-
-  Future<List<PendingNotificationRequest>> getPendingNotifications() async {
-    return await plugin.pendingNotificationRequests();
   }
 
   Future<void> cancelAllNotifications() async {
