@@ -49,9 +49,9 @@ class _FavoritesScreenBodyState extends State<FavoritesScreenBody> {
               restaurantList: favorites,
               showFavoriteButton: true,
             );
-          default:
-            return const Center(
-              child: Text("Unexpected error occurred."),
+          case FavoriteRestaurantsErrorState(message: final message):
+            return Center(
+              child: Text(message),
             );
         }
       },
